@@ -1,0 +1,84 @@
+w<!-- shared styles for all elements and index.html -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      .page-title {
+        @apply(--paper-font-display2);
+      }
+
+      @media (max-width: 600px) {
+        .page-title {
+          font-size: 24px!important;
+        }
+      }
+      .main-toolbar
+      {
+        
+        font-size: 20px;
+        width:100%;
+        display:inline-block;
+
+      }
+      .main-header
+      {
+        background-color: #263238;
+        color: white;
+
+        padding-top: 5px;
+      }
+      paper-icon-button {
+        --paper-icon-button-ink-color: white;
+        color:white;
+      }
+      app-header-layout
+      {
+        @apply(--vertical-layout);
+      }
+      .selected
+      {
+        @apply(--paper-item-focused)
+      }
+      .border
+      {
+        border: 0 solid #000;
+      }
+      iron-icon
+      {
+        cursor: pointer;
+      }
+      paper-item
+      {
+        cursor: pointer;
+        font-size: 20px;
+      }
+  
+      paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+      th
+      {
+        padding: 3px;
+      }
+      .Aligner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .Aligner-item {
+        max-width: 50%;
+      }
+
+      .Aligner-item--top {
+        align-self: flex-start;
+      }
+
+      .Aligner-item--bottom {
+        align-self: flex-end;
+      }
+    </style>
+  </template>
+</dom-module>

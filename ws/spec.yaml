@@ -1,0 +1,1944 @@
+swagger: "2.0"
+info:
+  description: "API reference of MyDIG web service."
+  version: "1.0.0"
+  title: "MyDIG web service API reference"
+  contact:
+    url: "http://usc-isi-i2.github.io/dig/"
+#    email: "yixiangy@isi.edu"
+#  license:
+#    name: "Apache 2.0"
+#    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "127.0.0.1:5000"
+basePath: ""
+schemes:
+- "http"
+paths:
+  # projects
+  /projects:
+    post:
+      tags:
+      - "projects"
+      summary: "Create a new project"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/project"
+      responses:
+        201:
+          description: "created"
+        404:
+          description: "not found"
+        409:
+          description: "exists"
+    get:
+      tags:
+      - "projects"
+      summary: "Get a list of all project names"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "ok"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "projects"
+      summary: "Delete all projects"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        204:
+          description: "deleted"
+        404:
+          description: "not found"
+  /projects/{project_name}:
+    post:
+      tags:
+      - "projects"
+      summary: "Update project by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/project"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    put:
+      tags:
+      - "projects"
+      summary: "Update project ny name (same as POST)"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/project"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "projects"
+      summary: "Get project by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "projects"
+      summary: "Delete project by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        404:
+          description: "not found"
+  # tags
+  /projects/{project_name}/tags:
+    post:
+      tags:
+      - "tags"
+      summary: "Create a tag"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/create_tag"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+        409:
+          description: "exist"
+    get:
+      tags:
+      - "tags"
+      summary: "Get all tags"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "tags"
+      summary: "Delete all tags"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        404:
+          description: "not found"
+  /projects/{project_name}/tags/{tag_name}:
+    post:
+      tags:
+      - "tags"
+      summary: "Update tag by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/update_tag"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    put:
+      tags:
+      - "tags"
+      summary: "Update tag by name (same as POST)"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/update_tag"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "tags"
+      summary: "Get tag by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "tags"
+      summary: "Delete tag by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        404:
+          description: "not found"
+  # fields
+  /projects/{project_name}/fields:
+    post:
+      tags:
+      - "fields"
+      summary: "Create a field"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/create_field"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+        409:
+          description: "exist"
+    get:
+      tags:
+      - "fields"
+      summary: "Get all fields"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "fields"
+      summary: "Delete all fields"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/fields/{field_name}:
+    post:
+      tags:
+      - "fields"
+      summary: "Update field by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/update_field"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    put:
+      tags:
+      - "fields"
+      summary: "Update field by name (same as POST)"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/update_field"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "fields"
+      summary: "Get field by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "fields"
+      summary: "Delete field by name"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/fields/{field_name}/spacy_rules:
+    post:
+      tags:
+      - "fields"
+      summary: "Create / update spacy rules of a field"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/spacy_rules"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "fields"
+      summary: "get spacy rules of a field"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "query"
+        name: "type"
+        description: ""
+        required: true
+        enum: ["all", "rules", "tokens", "results"]
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "fields"
+      summary: "delete spacy rules of a field"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  # glossaries
+  /projects/{project_name}/glossaries:
+    post:
+      tags:
+      - "glossaries"
+      summary: "Create a glossary"
+      description: "* (There's a bug in Swagger UI when posting a file, please ignore the errors in console)"
+      operationId: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "formData"
+        name: "glossary_name"
+        description: ""
+        required: true
+      - in: "formData"
+        name: "glossary_file"
+        description: ""
+        required: true
+        type : "file"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+        409:
+          description: "exist"
+    get:
+      tags:
+      - "glossaries"
+      summary: "Get a list of all glossaries"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "glossaries"
+      summary: "Delete all glossaries"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/glossaries/{glossary_name}:
+    post:
+      tags:
+      - "glossaries"
+      summary: "Update a glossary"
+      description: "* (There's a bug in Swagger UI when posting a file, please ignore the errors in console)"
+      operationId: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "glossary_name"
+        description: ""
+        required: true
+        description: ""
+      - in: "formData"
+        name: "glossary_file"
+        description: ""
+        required: true
+        description: ""
+        type: "file"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+        409:
+          description: "exist"
+    put:
+      tags:
+      - "glossaries"
+      summary: "Update a glossary (same as POST)"
+      description: ""
+      operationId: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "glossary_name"
+        description: ""
+        required: true
+        description: ""
+      - in: "formData"
+        name: "glossary_file"
+        description: ""
+        required: true
+        description: ""
+        type: "file"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+        409:
+          description: "exist"
+    get:
+      tags:
+      - "glossaries"
+      summary: "Get the content of a glossary"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "text/plain"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "glossary_name"
+        description: ""
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+#          schema:
+#            type: "file"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "glossaries"
+      summary: "Delete a glossary"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "glossary_name"
+        description: ""
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  # table attributes
+  /projects/{project_name}/table_attributes:
+    post:
+      tags:
+      - "table attributes"
+      summary: "Create a table attribute"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/table_attribute"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+        409:
+          description: "exists"
+    get:
+      tags:
+      - "table attributes"
+      summary: "get table attributes"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "table attributes"
+      summary: "delete table attributes"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/table_attributes/{attribute_name}:
+    post:
+      tags:
+      - "table attributes"
+      summary: "update a table attribute"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "attribute_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/table_attribute"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "table attributes"
+      summary: "get a table attribute"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "attribute_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "table attributes"
+      summary: "delete a table attribute"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "attribute_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  # data
+  /projects/{project_name}/data:
+    post:
+      tags:
+      - "data"
+      summary: "Import data"
+      description: ""
+      operationId: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "formData"
+        name: "file_data"
+        required: true
+        type: "file"
+      - in: "formData"
+        name: "file_name"
+        required: true
+      - in: "formData"
+        name: "file_type"
+        required: true
+        enum: ["json_lines"]
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "data"
+      summary: "Get TLD list"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  # actions
+  /projects/{project_name}/actions/add_data:
+    post:
+      tags:
+      - "actions"
+      summary: "Add data to queue"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/add_data"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/actions/landmark_extract:
+    post:
+      tags:
+      - "actions"
+      summary: "Sent data to Landmark tool for extraction"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/add_data"
+      responses:
+        202:
+          description: "accepted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/actions/extract:
+    post:
+      tags:
+      - "actions"
+      summary: "Start ETL for extraction"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        202:
+          description: "accepted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "actions"
+      summary: "ETL extraction status"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+
+#    get:
+#      tags:
+#      - "actions"
+#      summary: "Get status of actions"
+#      description: ""
+#      operationId: ""
+#      consumes:
+#      - "application/json"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - in: "path"
+#        name: "project_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "action_name"
+#        required: true
+#        enum: ["publish", "get_sample_pages", "extract_and_load_test_data", "update_to_new_index"]
+#        description: ""
+#      responses:
+#        200:
+#          description: "ok"
+#        400:
+#          description: "bad request"
+#        404:
+#          description: "not found"
+
+  # add tag to entity
+#  /projects/{project_name}/entities/{kg_id}/tags:
+#    post:
+#      tags:
+#      - "tags"
+#      summary: "Add tags to an entity instance"
+#      description: ""
+#      operationId: ""
+#      consumes:
+#      - "application/json"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - in: "path"
+#        name: "project_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "kg_id"
+#        required: true
+#        description: ""
+#      - in: "body"
+#        name: "body"
+#        description: ""
+#        required: true
+#        description: ""
+#        schema:
+#          $ref: "#/definitions/tag_name_array"
+#      responses:
+#        201:
+#          description: "created"
+#        400:
+#          description: "bad request"
+#        404:
+#          description: "not found"
+#    get:
+#      tags:
+#      - "tags"
+#      summary: "Get all tags of an entity instance"
+#      description: ""
+#      operationId: ""
+#      consumes:
+#      - "application/json"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - in: "path"
+#        name: "project_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "kg_id"
+#        required: true
+#        description: ""
+#      responses:
+#        200:
+#          description: "ok"
+#        404:
+#          description: "not found"
+#  /projects/{project_name}/entities/{entity_name}/{kg_id}/tags:
+#    post:
+#      tags:
+#      - "projects"
+#      summary: "Add tags to an entity instance"
+#      description: ""
+#      operationId: ""
+#      consumes:
+#      - "application/json"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - in: "path"
+#        name: "project_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "entity_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "kg_id"
+#        required: true
+#        description: ""
+#      - in: "body"
+#        name: "body"
+#        description: ""
+#        required: true
+#        description: ""
+#        schema:
+#          $ref: "#/definitions/tag_name_array"
+#      responses:
+#        201:
+#          description: "created"
+#        400:
+#          description: "bad request"
+#        404:
+#          description: "not found"
+#    get:
+#      tags:
+#      - "projects"
+#      summary: "Get all tags of an entity instance"
+#      description: ""
+#      operationId: ""
+#      consumes:
+#      - "application/json"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - in: "path"
+#        name: "project_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "entity_name"
+#        required: true
+#        description: ""
+#      - in: "path"
+#        name: "kg_id"
+#        required: true
+#        description: ""
+#      responses:
+#        200:
+#          description: "ok"
+#        404:
+#          description: "not found"
+  # field annotation
+  /projects/{project_name}/entities/{kg_id}/fields/{field_name}/annotations:
+    post:
+      tags:
+      - "field annotations"
+      summary: "Create / update annotation for a field of an entity"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/field_annotation"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    put:
+      tags:
+      - "field annotations"
+      summary: "Create / update annotation for a field of an entity (same as POST)"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/field_annotation"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "field annotations"
+      summary: "Get annotations for a field of an entity"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "field annotations"
+      summary: "Delete annotations for a field of an entity"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/entities/{kg_id}/fields/{field_name}/annotations/{key}:
+    get:
+      tags:
+      - "field annotations"
+      summary: "Get annotation for field by key"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "key"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "field annotations"
+      summary: "Delete annotation for field by key"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "path"
+        name: "field_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "key"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  # tag annotation
+  /projects/{project_name}/tags/{tag_name}/annotations/{entity_name}/annotations:
+    post:
+      tags:
+      - "tag annotations"
+      summary: "Create / update annotation for a tag of an entity type"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "entity_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/tag_annotation"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    put:
+      tags:
+      - "tag annotations"
+      summary: "Create / update annotation for a tag of an entity type (same as POST)"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "entity_name"
+        required: true
+        description: ""
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        description: ""
+        schema:
+          $ref: "#/definitions/tag_annotation"
+      responses:
+        201:
+          description: "created"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    get:
+      tags:
+      - "tag annotations"
+      summary: "Get annotations for a tag of an entity type"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "entity_name"
+        required: true
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "tag annotations"
+      summary: "Delete annotations for a tag of an entity type"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "entity_name"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+  /projects/{project_name}/tags/{tag_name}/annotations/{entity_name}/annotations/{kg_id}:
+    get:
+      tags:
+      - "tag annotations"
+      summary: "Get annotation for a tag of entity by kg_id"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "entity_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      - in: "query"
+        name: "kg"
+        required: false
+        type: "boolean"
+        description: ""
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+    delete:
+      tags:
+      - "tag annotations"
+      summary: "Delete annotation for a tag of entity by kg_id"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "project_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "tag_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "entity_name"
+        required: true
+        description: ""
+      - in: "path"
+        name: "kg_id"
+        required: true
+        description: ""
+      responses:
+        204:
+          description: "deleted"
+        400:
+          description: "bad request"
+        404:
+          description: "not found"
+
+definitions:
+  source:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      url:
+        type: "string"
+      index:
+        type: "string"
+      start_date:
+        type: "string"
+      end_date:
+        type: "string"
+      tlds:
+        type: "array"
+        items:
+          type: "string"
+      username:
+        type: "string"
+      password:
+        type: "string"
+  project:
+    type: "object"
+    properties:
+      project_name:
+        type: "string"
+      sources:
+        type: "array"
+        items:
+          $ref: "#/definitions/source"
+      configuration:
+        type: "object"
+        properties:
+          digapp_full_url:
+            type: "string"
+          digapp_sample_url:
+            type: "string"
+          sandpaper_full_url:
+            type: "string"
+          sandpaper_sample_url:
+            type: "string"
+      image_prefix:
+        type: "string"
+  tag:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      screen_label:
+        type: "string"
+      include_in_menu:
+        type: "boolean"
+      positive_class_precision:
+        type: "number"
+        format: "float"
+        description: "range in [0, 1]"
+      negative_class_precision:
+        type: "number"
+        format: "float"
+        description: "range in [0, 1]"
+  field:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      screen_label:
+        type: "string"
+      screen_label_plural:
+        type: "string"
+      type:
+        type: "string"
+        description: "enum(string | location | username | date | email | hyphenated | phone | image)"
+      show_in_search:
+        type: "boolean"
+      show_in_facets:
+        type: "boolean"
+      show_as_link:
+        type: "string"
+        description: "enum(text | entity)"
+      show_in_result:
+        type: "string"
+        description: "enum(header | detail | no | title | description)"
+      color:
+        type: "string"
+        description: "enum, please refer to the color list"
+      icon:
+        type: "string"
+        description: "enum, please refer to the icon list"
+      search_importance:
+        type: "integer"
+        description: "range in [1, 10]"
+      use_in_network_search:
+        type: "boolean"
+      combine_fields:
+        type: "boolean"
+        description: "(optional)"
+      group_name:
+        type: "string"
+        description: "(optional)"
+      glossaries:
+        type: "array"
+        items:
+          type: "string"
+          description: "uploaded glossary's name"
+      rule_extractor_enabled:
+        type: "boolean"
+      number_of_rules:
+        type: "integer"
+      predefined_extractor:
+        type: "string"
+        description: "enum(social_media | review_id | posting_date | phone | email | address | TLD | none)"
+      rule_extraction_target:
+        type: "string"
+        description: "enum(title_only | description_only | title_and_description)"
+      case_sensitive:
+        type: "boolean"
+        description: "only effective when there are glossaries associated"
+  create_tag:
+    type: "object"
+    properties:
+      tag_name:
+        type: "string"
+        description: "same as name in tag object"
+      tag_object:
+        $ref: "#/definitions/tag"
+  create_field:
+    type: "object"
+    properties:
+      field_name:
+        type: "string"
+        description: "same as name in field object"
+      field_object:
+        $ref: "#/definitions/field"
+  update_tag:
+    type: "object"
+    properties:
+      tag_object:
+        $ref: "#/definitions/tag"
+  update_field:
+    type: "object"
+    properties:
+      field_object:
+        $ref: "#/definitions/field"
+  tag_name_array:
+    type: "object"
+    properties:
+      tags:
+        type: "array"
+        items:
+          description: "tag name (tag should be created first)"
+          type: "string"
+  tag_annotation:
+    type: "object"
+    properties:
+      kg_id:
+        type: "string"
+      human_annotation:
+        type: "integer"
+  field_annotation:
+    type: "object"
+    properties:
+      key:
+        type: "string"
+      human_annotation:
+        type: "integer"
+  spacy_rules:
+    type: "object"
+    properties:
+      rules:
+        type: "array"
+      test_text:
+        type: "string"
+  table_attribute:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      field_name:
+        type: "string"
+      value:
+        type: "array"
+      info:
+        type: "object"
+  add_data:
+    type: "object"
+    properties:
+      tlds:
+        type: "object"
+        properties:
+          tld1:
+            type: "integer"
+
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
