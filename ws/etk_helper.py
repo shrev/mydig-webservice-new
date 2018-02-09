@@ -19,6 +19,7 @@ default_etk_config_str = """{
     "error_handling": "raise_error",
     "resources": {
         "dictionaries": {},
+        "stop_word_dictionaries": {},
         "landmark": []
     },
     "content_extraction": {
@@ -159,6 +160,13 @@ def generate_etk_config(project_master_config, webservice_config, project_name, 
         except:
             pass
         data_e_object['input_path'] = ["*.{}.*.text.`parent`".format(inferlink_field_name)]
+        data_e_object['guards'] = [
+            {
+              "type": "doc",
+              "path": "$.disable_default_extractors",
+              "regex": "(?!yes)"
+            }
+          ]
         data_e_object['fields'] = dict()
         for field_name in mapping.keys():
             data_e_object['fields'][field_name] = create_landmark_data_extractor_for_field(mapping[field_name],
@@ -172,8 +180,9 @@ def generate_etk_config(project_master_config, webservice_config, project_name, 
         add_glossary_extraction(default_etk_config, project_master_config, glossary_dir_path),
         project_master_config, project_name, project_local_path)
     etk_config = add_default_field_extractors(project_master_config, etk_config)
-    etk_config = add_kg_enhancement(etk_config)
+    etk_config = create_kg_enhancement(etk_config)
 
+    etk_config = add_default_extractors_guard(etk_config)
     # Adding additional etk configs
     additional_etk_config_path = os.path.join(project_local_path, project_name, 'working_dir/additional_etk_config/')
     if os.path.isdir(additional_etk_config_path):
@@ -183,6 +192,8 @@ def generate_etk_config(project_master_config, webservice_config, project_name, 
         _DATA_EXTRACTION = 'data_extraction'
         _RESOURCES = 'resources'
         _FILTERS = 'filters'
+        _EXTRACTION_POLICY = 'extraction_policy'
+        _KG_ENHANCEMENT = 'kg_enhancement'
 
         try:
             additional_etk_config_file_paths = glob.glob(additional_etk_config_path + '*.json')
@@ -190,17 +201,28 @@ def generate_etk_config(project_master_config, webservice_config, project_name, 
             for additional_etk_config_file_path in additional_etk_config_file_paths:
                 additional_etk_config = json.load(open(additional_etk_config_file_path, 'r'))
 
+                # handle kg enhancement
+                if _KG_ENHANCEMENT in additional_etk_config:
+                    kge = list() if _KG_ENHANCEMENT not in etk_config_ else etk_config_[_KG_ENHANCEMENT]
+                    if not isinstance(kge, list):
+                        kge = [kge]
+                    kg_enhancement = additional_etk_config[_KG_ENHANCEMENT]
+                    if not isinstance(kg_enhancement, list):
+                        kg_enhancement = [kg_enhancement]
+                    kge.extend(kg_enhancement)
+                    etk_config_[_KG_ENHANCEMENT] = kge
+
                 # Handle content_extraction
                 if _CONTENT_EXTRACTION in additional_etk_config:
                     for key, val in additional_etk_config[_CONTENT_EXTRACTION].iteritems():
                         if key in etk_config_[_CONTENT_EXTRACTION] and \
-                        isinstance(val, list) and \
-                        isinstance(etk_config_[_CONTENT_EXTRACTION][key], list):
+                                isinstance(val, list) and \
+                                isinstance(etk_config_[_CONTENT_EXTRACTION][key], list):
                             etk_config_[_CONTENT_EXTRACTION][key].extend(val)
 
                         elif key in etk_config_[_CONTENT_EXTRACTION] and \
-                        isinstance(val, dict) and \
-                        isinstance(etk_config_[_CONTENT_EXTRACTION][key], dict):
+                                isinstance(val, dict) and \
+                                isinstance(etk_config_[_CONTENT_EXTRACTION][key], dict):
                             etk_config_[_CONTENT_EXTRACTION][key].update(val)
 
                         elif key not in etk_config_[_CONTENT_EXTRACTION]:
@@ -214,13 +236,13 @@ def generate_etk_config(project_master_config, webservice_config, project_name, 
                 if _RESOURCES in additional_etk_config:
                     for key, val in additional_etk_config[_RESOURCES].iteritems():
                         if key in etk_config_[_RESOURCES] and \
-                        isinstance(val, list) and \
-                        isinstance(etk_config_[_RESOURCES][key], list):
+                                isinstance(val, list) and \
+                                isinstance(etk_config_[_RESOURCES][key], list):
                             etk_config_[_RESOURCES][key].extend(val)
 
                         elif key in etk_config_[_RESOURCES] and \
-                        isinstance(val, dict) and \
-                        isinstance(etk_config_[_RESOURCES][key], dict):
+                                isinstance(val, dict) and \
+                                isinstance(etk_config_[_RESOURCES][key], dict):
                             etk_config_[_RESOURCES][key].update(val)
 
                         elif key not in etk_config_[_RESOURCES]:
@@ -235,12 +257,29 @@ def generate_etk_config(project_master_config, webservice_config, project_name, 
                         # because helper could not decide the order of rules
                         etk_config_[_FILTERS][tld] = rules
 
+                # Handle extraction policy
+                if _EXTRACTION_POLICY in additional_etk_config:
+                    etk_config_[_EXTRACTION_POLICY] = additional_etk_config[_EXTRACTION_POLICY]
 
             etk_config = etk_config_
-        except:
+
+        except Exception as e:
+            print e
             print 'Error in merging additional ETK configs'
 
+    return etk_config
 
+
+def add_default_extractors_guard(etk_config):
+    if 'data_extraction' in etk_config:
+        for ex in etk_config['data_extraction']:
+            ex['guards'] = [
+            {
+              "type": "doc",
+              "path": "$.disable_default_extractors",
+              "regex": "(?!yes)"
+            }
+          ]
     return etk_config
 
 
@@ -258,7 +297,8 @@ def create_landmark_data_extractor_for_field(mapped_fields, field_name):
     if field_name == 'phone' or field_name == 'email' or field_name == 'posting_date':
         de['extractors']['extract_from_landmark']['config']['post_filter'] = [inferlink_fields_post_filter[field_name]]
     elif 'date' in field_name:
-        de['extractors']['extract_from_landmark']['config']['post_filter'] = [inferlink_fields_post_filter['posting_date']]
+        de['extractors']['extract_from_landmark']['config']['post_filter'] = [
+            inferlink_fields_post_filter['posting_date']]
     return de
 
 
@@ -349,13 +389,27 @@ def create_dictionary_data_extractor_for_field(ngram, dictionary_name, case_sens
     }
 
 
+def create_stop_word_dictionary_data_extractor_for_field(dictionary_name, priority):
+    return {
+        "priority": priority,
+        "extractors": {
+            "filter_results": {
+                "config": {
+                    "stop_word_dictionaries": dictionary_name
+                }
+            }
+        }
+    }
+
+
 def add_default_glossaries(etk_config, project_master_config, glossary_dir_path):
     gloss_dict = project_master_config['glossary_dicts']
     if 'resources' not in etk_config:
         etk_config['resources'] = dict()
     if 'dictionaries' not in etk_config['resources']:
         etk_config['resources']['dictionaries'] = dict()
-
+    if 'stop_word_dictionaries' not in etk_config['resources']:
+        etk_config['resources']['stop_word_dictionaries'] = dict()
     for d in gloss_dict.keys():
         etk_config['resources']['dictionaries'][d] = os.path.join(glossary_dir_path, gloss_dict[d]['path'])
 
@@ -407,6 +461,28 @@ def add_glossary_extraction(etk_config, project_master_config, glossary_dir_path
                         'case_sensitive'] if 'case_sensitive' in field_definition else False
                     de_obj['fields'][field_name]['extractors'].update(
                         create_dictionary_data_extractor_for_field(ngram, glossary, case_sensitive))
+        if 'blacklists' in field_definition and len(field_definition['blacklists']) > 0:
+            field_backlists = field_definition['blacklists']
+            for blacklist in field_backlists:
+                if blacklist in glossaries.keys():
+
+                    etk_config = create_kg_enhancement(etk_config)  # create it it's not there
+
+                    b_path = os.path.join(glossary_dir_path, glossaries[blacklist]['path'])
+
+                    # glossary path to etk
+                    etk_config['resources']['stop_word_dictionaries'][blacklist] = b_path
+
+                    # add this to data extraction part in etk config
+                    if field_name not in de_obj['fields']:
+                        de_obj['fields'][field_name] = dict()
+
+                    if 'extractors' not in de_obj['fields'][field_name]:
+                        de_obj['fields'][field_name]['extractors'] = dict()
+
+                    etk_config['kg_enhancement']['fields'][field_name] = \
+                        create_stop_word_dictionary_data_extractor_for_field(blacklist, 10)  # set priority to 10
+
     etk_config['data_extraction'].append(de_obj)
     return etk_config
 
@@ -526,7 +602,10 @@ def add_default_TLD_extractor(project_master_config, etk_config):
     return etk_config
 
 
-def add_kg_enhancement(etk_config):
+def create_kg_enhancement(etk_config):
+    if 'kg_enhancement' in etk_config:  # ignore if it's already there
+        return etk_config
+
     kg_enhancement = {
         "input_path": "knowledge_graph.`parent`",
         "fields": {
@@ -549,7 +628,7 @@ def add_kg_enhancement(etk_config):
         }
     }
 
-    etk_config['kg_enhancement'] = kg_enhancement
+    etk_config['kg_enhancement'] = copy.deepcopy(kg_enhancement)
     return etk_config
 
 
@@ -595,9 +674,9 @@ if __name__ == '__main__':
     webservice_config = config
     webservice_config['repo']['local_path'] = '/Users/yixiang/Projects/ISI/mydig-projects'
     project_master_config = json.load(codecs.open(
-        '/Users/yixiang/Projects/ISI/mydig-projects/test2/master_config.json'))
+        '/Users/yixiang/Projects/ISI/mydig-projects/test/master_config.json'))
     x = json.dumps(
-        generate_etk_config(project_master_config, webservice_config, 'test2', document_id='doc_id',
+        generate_etk_config(project_master_config, webservice_config, 'test', document_id='doc_id',
                             content_extraction_only=False),
         indent=2)
     print x

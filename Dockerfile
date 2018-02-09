@@ -1,5 +1,7 @@
+ARG ETK_VERSION
+
 # mydig-webservice
-FROM uscisii2/etk:1.0.5-br
+FROM uscisii2/etk:${ETK_VERSION}
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs

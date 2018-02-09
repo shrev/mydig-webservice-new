@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="../static/styles/main.css">
 <script src="../static/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+<script src="../static/bower_components/web-animations-js/web-animations.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="import" href="../static/bower_components/paper-item/paper-item.html">
 <link rel="import" href="../static/bower_components/paper-icon-button/paper-icon-button.html">
@@ -16,6 +17,14 @@
 <link rel="import" href="../static/bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../static/bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 <link rel="import" href="../static/bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../static/bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../static/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../static/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../static/bower_components/paper-menu-button/paper-menu-button.html">
+<!-- <link rel="import" href="../static/bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../static/bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+<link rel="import" href="../static/bower_components/iron-fit-behavior/iron-a11y-fit-behavior.html"> -->
+
 
 
 <link href="https://fonts.googleapis.com/css?family=Zilla+Slab:500i" rel="stylesheet">
@@ -28,7 +37,6 @@
 <link rel="import" href="../static/bower_components/iron-form/iron-form.html">
 <link rel="import" href="../static/bower_components/paper-tabs/paper-tab.html">
 <link rel="import" href="../static/bower_components/paper-checkbox/paper-checkbox.html">
-<link rel="import" href="../static/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../static/bower_components/paper-datatable/paper-datatable.html">
 
 <link rel="import" href="../static/bower_components/paper-swatch-picker/paper-swatch-picker.html">
@@ -198,6 +206,14 @@
                                 <paper-tooltip for="digui">DIG UI</paper-tooltip>
                                 <paper-icon-button id="landmarktool" icon="launch" on-tap="openLandmarkTool" style="width:45px;height:45px"></paper-icon-button> 
                                 <paper-tooltip for="landmarktool">Landmark Tool</paper-tooltip>
+                                <paper-menu-button style="width:45px;height:45px;padding:0px!important" horizontal-align="left">
+                                 <paper-icon-button icon="more-vert"  slot="dropdown-trigger" style="width:45px;height:45px;" ></paper-icon-button>
+                                  <paper-listbox slot="dropdown-content">
+                                    <paper-item>Share</paper-item>
+                                        <paper-item>Settings</paper-item>
+                                        <paper-item>Help</paper-item>
+                                    </paper-listbox>
+                                </paper-menu-button>
                               </div>
             </app-toolbar>
         </app-header>
@@ -223,10 +239,9 @@
                         <vaadin-grid  style="height:100%;" items="{{tldTableData}}" size=200 multi-sort="[[multiSort]]">
 
                         <!-- <vaadin-grid-selection-column frozen auto-select></vaadin-grid-selection-column> -->
-                        <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
-                        <vaadin-grid-column style="padding:2px">
-                            <template class="header">
-                            <vaadin-grid-sorter path="tld" style="font-weight:bold;padding-top:10px;padding-bottom:10px">
+                        <vaadin-grid-column style="padding-right:2px;padding-top:2px;padding-bottom:2px;padding-left: 5px;background-color:#E8E8E8">
+                            <template class="header" syle="background-color:#E8E8E8">
+                            <vaadin-grid-sorter path="tld" style="font-weight:bold;padding-top:10px;padding-bottom:10px;">
                                 <div> 
                                     <div style="float:left;height:35px;text-align: center;display: flex;flex-direction: column;justify-content: center;">TLD</div>
                                     <div style="float:right;">
@@ -251,15 +266,25 @@
                             <template>{{item.es_num}}</template>
                         </vaadin-grid-column>
                         <vaadin-grid-column>
+                            <template class="header"><vaadin-grid-sorter path="es_original_num" style="font-weight:bold;padding-top:10px;padding-bottom:10px"> <div> 
+                                    <div style="float:left;height:35px;text-align: center;display: flex;flex-direction: column;justify-content: center;">KG Original</div>
+<!--                                     <div style="float:right;">
+                                        <paper-icon-button icon="autorenew" on-tap="recreateMapping" id="btnRecreateMapping" style="width:35px;height:35px;color:#263238;background-color: #D8D8D8;border-radius: 20px"></paper-icon-button>
+                                    </div> -->
+                                </div>
+                            </vaadin-grid-sorter></template>
+                            <template>{{item.es_num}}</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
                             <template class="header"><vaadin-grid-sorter path="desired_num" style="font-weight:bold;padding-top:10px;padding-bottom:10px">
                              <div> 
                                     <div style="float:left;height:35px;text-align: center;display: flex;flex-direction: column;justify-content: center;">Desired</div>
                                     <div style="float:right;">
-                                        <paper-icon-button icon="create" style="width:35px;height:35px;color:#263238;background-color: #D8D8D8;border-radius: 20px"></paper-icon-button>
+                                        <paper-icon-button icon="create" on-click="updateDesiredDialogFunction" style="width:35px;height:35px;color:#263238;background-color: #D8D8D8;border-radius: 20px"></paper-icon-button>
                                     </div>
                                 </div>
                             </vaadin-grid-sorter></template>
-                            <template><input value="{{item.desired_num::input}}" ></template>
+                            <template><input value="{{item.desired_num::input}}" id={{item.tld}} on-input="updateSingleDesired" ></template>
                         </vaadin-grid-column>
                         <vaadin-grid-column>
                             <template class="header">
@@ -313,11 +338,11 @@
                     <a><paper-button style="width: 100%; color:grey" on-tap="fetchCatalogError">Log of building catalog</paper-button></a>
                     <br><br>
 
-                    <div style="width:100%;vertical-align: middle;">
+                  <!--   <div style="width:100%;vertical-align: middle;">
                         <paper-input id="globalDesiredNumber" label="Desired number of docs to run per TLD"
                                      value="10" type="number" min="0" max="999999999" maxlength="10" auto-validate pattern="[0-9]{1,11}"></paper-input>
                         <button style="float:right" on-tap="updateDesiredNumber">Update All</button>
-                    </div>
+                    </div> -->
                     <!--<paper-button style="width:100%"-->
                                   <!--on-tap="addDataToQueue"-->
                                   <!--raised>Add data to queue-->
@@ -640,7 +665,7 @@
                     <form content-type="multipart/form-data" id="importFileForm"
                           on-iron-form-presubmit="onPresubmit" method="POST">
                         <h4>Import File</h4>
-                        <paper-input type="file"></paper-input>
+                        <paper-input type="file" id="fileInput"></paper-input>
                         <!--<paper-input required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255"-->
                                      <!--class="addProjClass" label="File Name" id=file_name></paper-input> -->
                         <paper-button raised on-tap="submitImportFileForm" dialog-dismiss>Submit
@@ -650,6 +675,36 @@
                     </form>
                     </iron-form>
                 </paper-dialog-scrollable> 
+                </paper-dialog>
+
+                <paper-dialog id="updateDesiredDialog" style="width:50%;margin-left:auto;margin-right:auto"modal>
+                <p> <paper-input id="globalDesiredNumber" label="Desired number of docs to run per TLD"
+                                     value="10" type="number" min="0" max="999999999" maxlength="10" auto-validate pattern="[0-9]{1,11}"></paper-input>
+                </p>
+                <div class="buttons">
+                    <paper-button on-tap="updateDesiredNumber">Update</paper-button>
+                    <paper-button dialog-dismiss>Close</paper-button>
+                </div>
+            </paper-dialog>
+
+             <paper-dialog  id="importFileFormDialog"
+                          style="width:50%;margin-left:auto;margin-right:auto" modal>
+               <paper-dialog-scrollable>
+               <iron-form>
+                    <form content-type="multipart/form-data" id="importFileForm"
+                          on-iron-form-presubmit="onPresubmit" method="POST">
+                        <h4>Import File</h4>
+                        <paper-input type="file" id="fileInput"></paper-input>
+                        <!--<paper-input required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255"-->
+                                     <!--class="addProjClass" label="File Name" id=file_name></paper-input> -->
+                        <paper-button raised on-tap="submitImportFileForm" dialog-dismiss>Submit
+                        </paper-button>
+                        <paper-button raised dialog-dismiss>Close</paper-button>
+                        <br><br>
+                    </form>
+                    </iron-form>
+                </paper-dialog-scrollable> 
+
 
             </paper-dialog>
 

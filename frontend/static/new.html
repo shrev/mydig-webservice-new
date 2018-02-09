@@ -12,6 +12,8 @@
 <link rel="import" href="../static/bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../static/bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../static/bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../static/bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../static/bower_components/paper-styles/color.html">
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 <link rel="import" href="../static/elements/elements.html">
 <link rel="import" href="../static/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
@@ -46,6 +48,8 @@
 		 
 		 <iron-ajax id="getSamplePages" method="GET" content-type="application/json" handle-as="json"
 		  on-response="dropDownData"></iron-ajax>
+     <iron-ajax id="deleteProjectRequest"  method="DELETE" handle-as = "json" on-response = "deleteSuccess"></iron-ajax>
+
 
        <app-header-layout style="z-index: 2">
          <app-header slot="header" class="main-header" fixed>
@@ -67,17 +71,26 @@
 
 
 
-<div style="width:94%;margin-left:3%;margin-right:auto;display: inline-block;">
+<div style="width:94%;margin-left:3%;margin-right:auto;display: block;">
  <div style="float:left">          	
    <h3 style="margin-bottom:3px;margin-top: 2%;font-weight: bold">All Projects</h3>
 </div>
+<!-- <div style="float:right;margin-bottom:3px;text-align: right; ">
+<paper-icon-button icon="add-circle" id="add_icon" on-click="toggle" style="height: 45px!important;width:45px!important;color:#263238;"></paper-icon-button>
+<iron-collapse style="float: right;" id="add_project">
+    <div style="width:100%;background-color:white;display:inline-block;text-align:left;margin:3px;padding:5px">
+    	<paper-input  required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255" class="addProjClass" label="Name:" id="saveProjectFormName" style="width:30%;float:left"></paper-input>
+		<paper-button style="float:right;margin-top:20px;text-align:center;margin-right:20px;padding:1%" on-click="addProject" raised><strong>Save</strong></paper-button>
+	</div>
+</iron-collapse>
+</div> -->
 <div style="float:right;margin-bottom:3px;text-align: right;width:30%">
 <iron-icon icon="add-circle" id="add_icon" on-click="toggle" style="height: 35px;width:35px;"></iron-icon>
 <iron-collapse style="float: right; width:100%" id="add_project">
     <div style="width:100%;background-color:white;display:inline-block;text-align:left;margin:3px;padding:5px">
-    	<paper-input  required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255" class="addProjClass" label="Name:" id="saveProjectFormName" style="width:100%;float:left"></paper-input>
-		<paper-button style="float:right;margin-top:20px;text-align:center;margin-right:20px;padding:1%" on-click="addProject" raised><strong>Save</strong></paper-button>
-	</div>
+      <paper-input  required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255" class="addProjClass" label="Name:" id="saveProjectFormName" style="width:100%;float:left"></paper-input>
+    <paper-button style="float:right;margin-top:20px;text-align:center;margin-right:20px;padding:1%" on-click="addProject" raised><strong>Save</strong></paper-button>
+  </div>
 </iron-collapse>
 </div>
 </div>
@@ -85,7 +98,7 @@
 
 
 
- <paper-card style="width:94%;margin-left:3%;margin-right:auto; margin-top: -5px;padding: 0px;z-index:1;">
+ <paper-card style="width:94%;margin-left:3%;margin-right:auto; margin-top: 5px;padding: 0px;z-index:1;">
 		<template is="dom-repeat" items="{{projectDatas}}">     
               <div  id = "projectSection" style="height:65px;margin-left:20px;margin-right:20px" >
               <div style="margin-top:1em;float:left;"><span><h4><b>{{item.name}}</b></h4></span></div>
@@ -94,7 +107,10 @@
 	              	<div class="border">
 	              <iron-icon icon="chevron-right" style="float:right;height:38px;width:38px;"></iron-icon>
 	              </div>
-	              </a>
+                </a>
+                <div class="border">
+                <iron-icon icon="delete" on-tap="deleteProject" style="margin-right:8px;float:right;height:35px;"></iron-icon>
+                </div>
 
 	          </div>
 	      </div>
@@ -297,7 +313,41 @@ Polymer({
   	},
   	_restoreDocumentScrolling: function() {
   		  document.body.style.overflow = '';
-  	}
+  	},
+    deleteProject: function(e) {
+        project_name = e.model.item.name;
+
+        if(window.confirm("Are you sure to delete project: " + project_name + "?") == false) {
+            return;
+        }
+
+        this.$.deleteProjectRequest.url = backend_url + "projects/" + project_name;
+        this.$.deleteProjectRequest.generateRequest();
+        console.log("here");
+
+        /*ajax({
+            type: "DELETE",
+            url: backend_url + "projects/" + project_name,
+            async: true,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            context: this,
+            success: function (msg) {
+          location.reload();
+            },
+            error: function(msg) {
+                alert("Can not delete project: " + project_name);
+                console.log(msg);
+            }
+        });*/
+    },
+    deleteSuccess: function()
+    {
+      console.log("success");
+      location.reload();
+    }
+
 
 });
 </script>

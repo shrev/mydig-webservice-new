@@ -691,6 +691,10 @@ poly = Polymer({
         this.$.updateSavedTags.generateRequest();
         editTagsDialog.toggle();
     },
+    updateDesiredDialogFunction:function(){
+        this.$$('#updateDesiredDialog').toggle();
+       
+    },
     updateDone: function () {
         var obj = {};
         // obj.Authorization = "Basic " + btoa(username + ":" + password);
@@ -1368,7 +1372,7 @@ poly = Polymer({
     },
     submitImportFileForm: function() {
         var importFileFormData = new FormData();
-        var file = $("#importFileFormDialog paper-input[type=file] input")[0].files[0];
+        var file = this.$$("#fileInput").inputElement.inputElement.files[0]
         importFileFormData.append("file_data", file);
         importFileFormData.append("file_name", file.name);
         importFileFormData.append("file_type", "json_lines");
@@ -1544,15 +1548,49 @@ poly = Polymer({
             }
         });
     },
-    updateDesiredNumber: function() {
-        var num = parseInt(this.$.globalDesiredNumber.value);
+    updateSingleDesired: function(e)
+    {
+        num = parseInt(e.srcElement.value);
+        console.log(e.srcElement.id);
+        id = e.srcElement.id;
         num = num <= 9999999999 ? num : 999999999;
         num = num >= 0 ? num : 0;
+        payload = {"tlds":{}};
+        payload["tlds"][[id]]= num;
+        //console.log(payload)
+
+         $.ajax({
+            type: "POST",
+            url: backend_url + "projects/" + projectName + '/actions/desired_num',
+            async: true,
+            dataType: "json",
+            processData: false,
+            context: this,
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(payload),
+            // headers: {
+            //     "Authorization": AUTH_HEADER
+            // },
+            success: function (msg) {
+                 //console.log("updated");
+                this.refreshTldTable();
+            }
+        });
+    },
+    updateDesiredNumber: function() {
+        var num = parseInt(this.$.globalDesiredNumber.value);
+        this.$$('#updateDesiredDialog').toggle();
+        num = num <= 9999999999 ? num : 999999999;
+        num = num >= 0 ? num : 0;
+        console.log("im here")
 
         payload = {"tlds":{}};
         this.tldTableData.forEach(function(obj){
             payload["tlds"][[obj["tld"]]] = num;
+            //console.log(obj["tld"]);
         });
+
+        //console.log(payload)
 
         $.ajax({
             type: "POST",

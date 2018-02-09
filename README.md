@@ -28,7 +28,7 @@
 
 ### Build image
 
-    docker build -t uscisii2/mydig_ws:1.0.0 -t uscisii2/mydig_ws:latest .
+    docker build -t uscisii2/mydig_ws:1.0.0 .
 
 ### Run container
 
@@ -45,4 +45,7 @@
     -v $(pwd)/ws/config_docker.py:/app/mydig-webservice/ws/config.py \
     -v $(pwd)/../mydig-projects:/shared_data/projects \
     uscisii2/mydig_ws:1.0.0 /bin/bash
-        
+       
+## Search API
+
+[Search API document](search_api_doc.md)
