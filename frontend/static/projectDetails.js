@@ -728,6 +728,12 @@ poly = Polymer({
         this.setDialog(true);
         dialog.open();*/
         },
+        importProjectFunction: function () {
+        this.$$('#importProjectConfigDialog').toggle();
+        /*var dialog = document.querySelector('#sureToDeleteDialog');
+        this.setDialog(true);
+        dialog.open();*/
+        },
   /*  setDialog: function (open) {
             if (open) {
                 var node = document.querySelector('#sureToDeleteDialog');

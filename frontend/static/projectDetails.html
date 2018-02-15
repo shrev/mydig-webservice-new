@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="../static/styles/main.css">
 <script src="../static/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-<script src="../static/bower_components/web-animations-js/web-animations.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="import" href="../static/bower_components/paper-item/paper-item.html">
 <link rel="import" href="../static/bower_components/paper-icon-button/paper-icon-button.html">
@@ -16,11 +15,14 @@
 <link rel="import" href="../static/bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../static/bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../static/bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../static/bower_components/iron-image/iron-image.html">
 <link rel="import" href="../static/bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../static/bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../static/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../static/bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../static/bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../static/styles/kibana-icon.html">
+
 <!-- <link rel="import" href="../static/bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../static/bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
 <link rel="import" href="../static/bower_components/iron-fit-behavior/iron-a11y-fit-behavior.html"> -->
@@ -206,12 +208,13 @@
                                 <paper-tooltip for="digui">DIG UI</paper-tooltip>
                                 <paper-icon-button id="landmarktool" icon="launch" on-tap="openLandmarkTool" style="width:45px;height:45px"></paper-icon-button> 
                                 <paper-tooltip for="landmarktool">Landmark Tool</paper-tooltip>
-                                <paper-menu-button style="width:45px;height:45px;padding:0px!important" horizontal-align="left">
+                                <paper-menu-button style="width:45px;height:45px;padding:0px!important" horizontal-align="right">
                                  <paper-icon-button icon="more-vert"  slot="dropdown-trigger" style="width:45px;height:45px;" ></paper-icon-button>
-                                  <paper-listbox slot="dropdown-content">
-                                    <paper-item>Share</paper-item>
-                                        <paper-item>Settings</paper-item>
-                                        <paper-item>Help</paper-item>
+                                  <paper-listbox slot="dropdown-content" selected="-1">
+                                    <paper-item on-tap="exportProject" id="menuExportProject"><iron-icon icon="file-download" style="float:left;padding-right: 5px"></iron-icon><div style="float: right">Export Project</div></paper-item>
+                                    <paper-item on-tap="importProjectFunction" id="menuImportProject"><iron-icon icon="file-upload" style="float:left;padding-right: 5px"></iron-icon><div style="float: right">Import Project</div></paper-item>
+                                    <paper-item on-tap="getToHome"><iron-icon icon="arrow-back" style="float:left;padding-right: 5px"></iron-icon><div style="float: right">All Projects</div></paper-item>
+                                    <paper-item on-tap="getToHome"><iron-image src="../static/images/kibana-Mark-Black.png" style="float:left;padding-right: 5px;height:24px;width:24px"></iron-image><div style="float: right">Kibana</div></paper-item>
                                     </paper-listbox>
                                 </paper-menu-button>
                               </div>
@@ -220,12 +223,6 @@
 
           <iron-collapse id="tabAction">
                 
-                 
-                <!--<paper-toast opened id="toast1" duration="0" text="This toast will stay opened until you close it, or open another toast.">-->
-                  <!--<paper-button onclick="toast1.toggle()" class="yellow-button">X</paper-button>-->
-                <!--</paper-toast>-->
-
-        
 
                 <div style="margin: 1em;padding-left: 10px;padding-top: 20px;padding-bottom: 10px" >
                         <span style=" float:left;text-transform: uppercase;">Pipeline
@@ -704,8 +701,22 @@
                     </form>
                     </iron-form>
                 </paper-dialog-scrollable> 
+            </paper-dialog>
 
-
+            <paper-dialog id="importProjectConfigDialog" with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                          on-iron-overlay-closed="_restoreDocumentScrolling"
+                          style="width:50%;margin-left:auto;margin-right:auto" modal>
+                <paper-dialog-scrollable>
+                    <form is="iron-form" content-type="multipart/form-data" id="importProjectConfigForm"
+                          on-iron-form-presubmit="onPresubmit" method="POST">
+                        <h4>Import Project Config File</h4>
+                        <paper-input type="file"></paper-input>
+                        <paper-button raised on-tap="submitImportProjectConfigForm" dialog-dismiss>Submit
+                        </paper-button>
+                        <paper-button raised dialog-dismiss>Close</paper-button>
+                        <br><br>
+                    </form>
+                </paper-dialog-scrollable>
             </paper-dialog>
 
 
@@ -1085,6 +1096,8 @@
 
 
 
+
+
           </div> 
 
       
@@ -1112,22 +1125,7 @@
 
            
 
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="importProjectConfigDialog"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <paper-dialog-scrollable>
-                    <form is="iron-form" content-type="multipart/form-data" id="importProjectConfigForm"
-                          on-iron-form-presubmit="onPresubmit" method="POST">
-                        <h4>Import Project Config File</h4>
-                        <paper-input type="file"></paper-input>
-                        <paper-button raised on-tap="submitImportProjectConfigForm" dialog-dismiss>Submit
-                        </paper-button>
-                        <paper-button raised dialog-dismiss>Close</paper-button>
-                        <br><br>
-                    </form>
-                </paper-dialog-scrollable>
 
-            </paper-dialog>
 
             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="addTagsDialog"
