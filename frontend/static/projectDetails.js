@@ -361,7 +361,7 @@ function addNewField() {
     var result = document.getElementById("fieldresultinput").selectedItem.value;
     var search = document.getElementById("fieldsearchinput2").checked;
     var networksearch = document.getElementById("fieldnetworkinput").checked;
-    var ruleextractTarget = document.getElementById("fieldRuleExtractorTarget").selectedItem.value;
+   /* var ruleextractTarget = document.getElementById("fieldRuleExtractorTarget").selectedItem.value;*/
     var caseSense = document.getElementById("getCaseSenstive").checked;
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json");
@@ -393,7 +393,7 @@ function addNewField() {
             document.getElementById("fieldresultinput").selected = "0";
             document.getElementById("fieldsearchinput2").checked = false;
             document.getElementById("fieldnetworkinput").checked = false;
-            document.getElementById("fieldRuleExtractorTarget").selected = "2";
+            /*document.getElementById("fieldRuleExtractorTarget").selected = "2";*/
 
         }
     };
@@ -734,6 +734,32 @@ poly = Polymer({
         this.setDialog(true);
         dialog.open();*/
         },
+        deleteAllFileData: function() {
+
+        if(window.confirm("Are you sure to delete all data?") == false) {
+            return;
+        }
+
+        payload = {"tlds":[]};
+        this.tldTableData.forEach(function(obj){
+            payload["tlds"].push(obj["tld"]);
+        });
+
+        $.ajax({
+            type: "DELETE",
+            url: backend_url + "projects/" + projectName + '/data',
+            async: true,
+            dataType: "json",
+            processData: false,
+            context: this,
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(payload),
+            success: function (msg) {
+                // console.log(msg);
+                // this.refreshTldTable();
+            }
+        });
+    },
   /*  setDialog: function (open) {
             if (open) {
                 var node = document.querySelector('#sureToDeleteDialog');
@@ -1119,7 +1145,7 @@ poly = Polymer({
     },
     setIcon: function (e) {
         this.$$('#fieldiconinput').value = e.model.item;
-        papericonSet.toggle();
+        this.$$('#papericonSet').toggle();
     },
     setEditIcon: function (e) {
         this.$$('#iconField').value = e.model.item;
@@ -1171,7 +1197,7 @@ poly = Polymer({
         this.$$("#fieldresultinput").selected = "0";
         this.$$("#fieldsearchinput2").checked = false;
         this.$$("#fieldnetworkinput").checked = false;
-        this.$$("#fieldRuleExtractorTarget").selected = "2";
+        /*this.$$("#fieldRuleExtractorTarget").selected = "2";*/
     },
     saveTempGlossaries: function () {
         this.fieldFormGlossaries = [];
@@ -1559,8 +1585,8 @@ poly = Polymer({
         num = parseInt(e.srcElement.value);
         console.log(e.srcElement.id);
         id = e.srcElement.id;
-        num = num <= 9999999999 ? num : 999999999;
-        num = num >= 0 ? num : 0;
+        /*num = num <= 9999999999 ? num : 999999999;
+        num = num >= 0 ? num : 0;*/
         payload = {"tlds":{}};
         payload["tlds"][[id]]= num;
         //console.log(payload)
@@ -1616,6 +1642,10 @@ poly = Polymer({
             }
         });
     },
+    toggleIcons()
+    {
+        this.$$("#papericonSet").toggle();
+    },
     addDataToQueue: function() {
 
         $.ajax({
@@ -1647,10 +1677,13 @@ poly = Polymer({
             // },
             success: function (msg) {
                 // console.log(msg["error_log"]);
-                $("#logDialog .logDialogContent:first").empty();
+              Polymer.dom(this.$$("#logDialogContent")).innerHTML ="";
+              var s="";
                 msg["error_log"].forEach(function(ele) {
-                    $("<p>"+ele+"</p>").appendTo("#logDialog .logDialogContent:first");
+                   s=s+"<p>"+ele+"</p>";
+                    /*this.$$("#logDialogContent").html("blahaahah")*/
                 });
+                 Polymer.dom(this.$$("#logDialogContent")).innerHTML =s;
                 this.$.logDialog.toggle();
             }
         });
