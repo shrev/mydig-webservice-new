@@ -437,12 +437,20 @@ function setDefaultColor() {
 }
 
 function addDefaultIcon() {
-    document.getElementById("fieldiconinput").value = "icons:default";
+    /*document.getElementById("fieldiconinput").value = "icons:default";*/
 }
 
 function addDefaultColor() {
     document.getElementById("fieldcolorinput").value = "amber";
 }
+
+/* window.addEventListener('WebComponentsReady', function() {
+      scope.getIconNames = function(iconset) {
+        return iconset.getIconNames();
+      };
+      scope.parentNode.getIconNames = scope.getIconNames;
+      iconsetRepeat.items = new Polymer.IronMeta({type: 'iconset'}).list;
+    });*/
 
 
 //polymer functions
@@ -461,6 +469,35 @@ poly = Polymer({
         this.tableAttributes = [];
         this.fieldNames = [];
         this.etkStatus = false;
+        this.scope =[]
+        this.scope.parentNode={}
+        this.iconsetRepeat ={}
+        this.newField = {}
+        this.fieldForm = {}
+        this.newFieldColor = "#263238"
+
+        this.scope.getIconNames = function(iconset) {
+        return iconset.getIconNames();
+        console.log("heree");
+      };
+
+      this.iconsetRepeat = new Polymer.IronMeta({type: 'iconset'}).list;
+      console.log(this.iconsetRepeat[0]._icons);
+
+      /*for(var i=0;i<iconsetRepeat.size();i++)
+      {
+        if(i==0)
+            {
+                scope[i]=[]
+            }
+        scope[i].push
+      }
+*/
+        this.scope.parentNode.getIconNames = this.scope.getIconNames;
+
+       /* this.iconsets = this.iconset;*/
+       /* console.log(iconset.getOwnPropertyNames());
+        console.log(Polymer.getOwnPropertyNames())*/
 
         this.$.projectNameHeader.textContent = "Project: " + projectName;
 
@@ -470,6 +507,7 @@ poly = Polymer({
         this.refreshTldTable(true);
         this.tldTableData = [];
         // this.$.tldTable.sort = this.sortCaseInsensitive;
+       
 
         $(document).on('tap', '.btnAddToLandmark', this.addToLandmark);
 
@@ -505,6 +543,16 @@ poly = Polymer({
         this.extractionTargetArray = ["title_only", "description_only", "title_and_description"];
         //this.$.actions.focus();
     },
+    getIconNames: function(iconset) {
+        return iconset.getIconNames();
+      },
+    setNewIconColor: function()
+    {
+        /*console.log(this.$$('#newColorSelect').node);
+*/        if (this.$$('#newColorSelect').color == undefined) return "amber";
+        this.newFieldColor= this.$$('#newColorSelect').color;
+        return this.$$('#newColorSelect').color
+    },
     goToLandMark: function(e)
     {
         //console.log("there" + e.target.value);
@@ -523,7 +571,8 @@ poly = Polymer({
 
     },
     _getColorSelected: function (color) {
-        return Object.keys(this.colorSet).find(key => this.colorSet[key] === color);
+        return 0
+        /*return Object.keys(this.colorSet).find(key => this.colorSet[key] === color);*/
     },
     _getTableDropDown: function (name) {
         if (name != undefined && name != "") {
@@ -833,7 +882,7 @@ poly = Polymer({
         this.$.updateSavedFields.body = JSON.stringify({
             "field_name": this.fieldForm.name,
             "field_object": {
-                "color": this.fieldForm.color,
+                "color": this.newFieldColor,
                 "case_sensitive": this.fieldFormGlossaries.length > 0 ? this.fieldForm.case_sensitive : false,
                 "combine_fields": this.fieldForm.combine_fields,
                 "description": this.fieldForm.description,
@@ -1144,7 +1193,10 @@ poly = Polymer({
         this.$$('#spacyRulesTextArea').value = '{"rules": [],"test_text": "string"}';
     },
     setIcon: function (e) {
-        this.$$('#fieldiconinput').value = e.model.item;
+       /* console.log($(e.currentTarget));
+        console.log($(e.currentTarget)[0]);
+        console.log($(e.currentTarget)[0].__data.icon);*/
+        this.$$('#fieldInputIcon').icon = $(e.currentTarget)[0].__data.icon;
         this.$$('#papericonSet').toggle();
     },
     setEditIcon: function (e) {
@@ -1185,7 +1237,7 @@ poly = Polymer({
 
 
         this.$$("#fieldgroupnameinput").value = "";
-        this.$$("#fieldiconinput").value = "icons:default";
+/*        this.$$("#fieldiconinput").value = "";*/
         this.$$("#fieldsearchinput").selected = "0";
         this.$$("#fieldtypeinput").selected = "0";
         this.$$("#fieldRuleExtractor").checked = false;
@@ -1198,6 +1250,104 @@ poly = Polymer({
         this.$$("#fieldsearchinput2").checked = false;
         this.$$("#fieldnetworkinput").checked = false;
         /*this.$$("#fieldRuleExtractorTarget").selected = "2";*/
+    },
+    addNewField: function(){
+
+    var xhr = new XMLHttpRequest();
+    var url = backend_url + "projects/" + projectName + "/fields";
+    var name = this.$$("#fieldnameinput").value;
+    if (/\s/.test(name)) {
+        return;
+    }
+    var description = this.$$("#fielddescriptioninput").value;
+    var screenlabel = this.$$("#fieldscreenlabelinput").value;
+    var screen_label_plural = this.$$("#fieldscreenlabelPluralinput").value;
+    if (screenlabel == "") screenlabel = name;
+    if (screen_label_plural == "") screen_label_plural = screenlabel;
+
+
+    var color = this.$$("#fieldcolorinput").value;
+    var type = this.$$("fieldtypeinput").selectedItem.value;
+    var predefinedExtractor = "";
+    if (this.$$("#fieldpredefinedExtractor").selectedItem) {
+        predefinedExtractor = this.$$("#fieldpredefinedExtractor").selectedItem.value;
+    }
+
+    var groupname = this.$$("#fieldgroupnameinput").value;
+    var icon = this.$$("#fieldiconinput").value;
+    var searchimp = parseInt(this.$$("#fieldsearchinput").selectedItem.value);
+    var ruleExtractor = this.$$("#fieldRuleExtractor").checked;
+    var combinefields = this.$$("#fieldcombinedfieldsinput").checked;
+    var facet = this.$$("#fieldfacetinput").checked;
+    var link = this.$$("#fieldlinkinput").selectedItem.value;
+    var result = this.$$("#fieldresultinput").selectedItem.value;
+    var search = this.$$("#fieldsearchinput2").checked;
+    var networksearch = this.$$("#fieldnetworkinput").checked;
+   /* var ruleextractTarget = this.$$("#fieldRuleExtractorTarget").selectedItem.value;*/
+    var caseSense = this.$$("#getCaseSenstive").checked;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    // xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            addFieldDialog.toggle();
+            this.$$("#getFields").generateRequest();
+            glossariesNewField = [];
+            this.$$("#fieldnameinput").value = "";
+            this.$$("#fielddescriptioninput").value = "";
+            this.$$("#fieldscreenlabelinput").value = "";
+            this.$$("#fieldscreenlabelPluralinput").value = "";
+            this.$$("#fieldcolorinput").value = "amber";
+            this.$$("#getCaseSenstive").checked = "";
+
+
+            this.$$("#fieldgroupnameinput").value = "";
+            this.$$("#fieldiconinput").value = "icons:default";
+            this.$$("#fieldsearchinput").selected = "0";
+            this.$$("#fieldtypeinput").selected = "0";
+            this.$$("#fieldRuleExtractor").checked = false;
+            this.$$("#fieldpredefinedExtractor").selected = "0";
+
+            this.$$("#fieldcombinedfieldsinput").checked = false;
+            this.$$("#fieldfacetinput").checked = false;
+            this.$$("#fieldlinkinput").selected = "0";
+            this.$$("#fieldresultinput").selected = "0";
+            this.$$("#fieldsearchinput2").checked = false;
+            this.$$("#fieldnetworkinput").checked = false;
+            /*document.getElementById("fieldRuleExtractorTarget").selected = "2";*/
+
+        }
+    };
+
+    var data = JSON.stringify({
+        "field_name": name,
+        "field_object": {
+            "color": color,
+            "case_sensitive": caseSense,
+            "combine_fields": combinefields,
+            "description": description,
+            "glossaries": glossariesNewField,
+            "group_name": groupname,
+            "icon": icon,
+            "name": name,
+            "screen_label": screenlabel,
+            "screen_label_plural": screen_label_plural,
+            "search_importance": searchimp,
+            "show_as_link": link,
+            "show_in_facets": facet,
+            "show_in_result": result,
+            "show_in_search": search,
+            "type": type,
+            "use_in_network_search": networksearch,
+            "rule_extractor_enabled": ruleExtractor,
+            "predefined_extractor": predefinedExtractor,
+            "rule_extraction_target": ruleextractTarget
+        }
+    });
+
+    xhr.send(data);
+
     },
     saveTempGlossaries: function () {
         this.fieldFormGlossaries = [];
