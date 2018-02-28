@@ -162,7 +162,7 @@ var openFile = function (event) {
     reader.readAsText(input.files[0]);
 };
 
-function updateFormData() {
+/*function updateFormData() {
     var glossName = document.getElementById('glossary_name').value;
     var file = document.getElementById("glossary_file").getElementsByTagName("input")[0].files[0];
 
@@ -189,7 +189,7 @@ function updateFormData() {
 
     request.send(formData);
 
-}
+}*/
 
 // function uploadSamplePagesFiles() {
 //     var file = document.getElementById("samplePagesFile").getElementsByTagName("input")[0].files[0];
@@ -543,6 +543,37 @@ poly = Polymer({
         this.extractionTargetArray = ["title_only", "description_only", "title_and_description"];
         //this.$.actions.focus();
     },
+    submitGlossaryFormData: function(){
+        var glossName = this.$$("#glossary_nameInput").value;
+    if (/\s/.test(glossName)) {
+        return;
+    }
+    var file = this.$$("#glossary_fileInput").inputElement.inputElement.files[0];
+    var url = backend_url + "projects/" + projectName + "/glossaries";
+//------------
+    var formData = new FormData();
+
+    formData.append("glossary_name", glossName);
+    formData.append("glossary_file", file); // number 123456 is immediately converted to a string "123456"
+    // console.log(formData);
+
+    var request = new XMLHttpRequest();
+    request.open("POST", url);
+//  request.setRequestHeader("Content-type", "application/json");
+//     request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 201) {
+ 
+            $("#glossary_nameInput").value = "";
+           $("#addGlossaryDialog").toggle();
+           $("#getGlossary").generateRequest();
+        }
+
+    };
+
+    request.send(formData);
+
+    },
     getIconNames: function(iconset) {
         return iconset.getIconNames();
       },
@@ -571,8 +602,9 @@ poly = Polymer({
 
     },
     _getColorSelected: function (color) {
-        return 0
-        /*return Object.keys(this.colorSet).find(key => this.colorSet[key] === color);*/
+        /*return 0*/
+        if (color!= undefined)
+            return Object.keys(this.colorSet).find(key => this.colorSet[key] === color);
     },
     _getTableDropDown: function (name) {
         if (name != undefined && name != "") {
@@ -849,13 +881,44 @@ poly = Polymer({
 
         this.$.editField.generateRequest();
 
+       /* console.log(fieldForm.icon);*/
+
         this.$$('#editFieldsDialog').toggle();
 
     },
     editGlossaryFunction: function (e) {
         this.glossaryForm = {};
         this.glossaryForm = e.model.item[0];
-        editGlossariesDialog.toggle();
+        this.$$("#editGlossariesDialog").toggle();
+    },
+    updateGlossaryFormData: function()
+    {
+        var glossName = this.$$('#glossary_name').value;
+        var file = this.$$('#glossary_file').inputElement.inputElement.files[0]
+        /*console.log($('#glossInput')[0].files[0]);*/
+
+
+    var url = backend_url + "projects/" + projectName + "/glossaries/" + glossName;
+    //------------
+    var formData = new FormData();
+
+    formData.append("glossary_name", glossName);
+    formData.append("glossary_file", file); // number 123456 is immediately converted to a string "123456"
+    // console.log(formData);
+
+    var request = new XMLHttpRequest();
+    request.open("POST", url);
+    //  request.setRequestHeader("Content-type", "application/json");
+    // request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 201) {
+            this.$$("#editGlossariesDialog").toggle();
+            this.$$("#getGlossary").generateRequest();
+        }
+    };
+
+    request.send(formData);
     },
     updateField: function (e) {
         var obj = {};
@@ -882,7 +945,7 @@ poly = Polymer({
         this.$.updateSavedFields.body = JSON.stringify({
             "field_name": this.fieldForm.name,
             "field_object": {
-                "color": this.newFieldColor,
+                "color": this.colorSet[this.newFieldColor],
                 "case_sensitive": this.fieldFormGlossaries.length > 0 ? this.fieldForm.case_sensitive : false,
                 "combine_fields": this.fieldForm.combine_fields,
                 "description": this.fieldForm.description,
@@ -1267,7 +1330,7 @@ poly = Polymer({
 
 
     var color = this.$$("#fieldcolorinput").value;
-    var type = this.$$("fieldtypeinput").selectedItem.value;
+    var type = this.$$("#fieldtypeinput").selectedItem.value;
     var predefinedExtractor = "";
     if (this.$$("#fieldpredefinedExtractor").selectedItem) {
         predefinedExtractor = this.$$("#fieldpredefinedExtractor").selectedItem.value;
@@ -1283,6 +1346,9 @@ poly = Polymer({
     var result = this.$$("#fieldresultinput").selectedItem.value;
     var search = this.$$("#fieldsearchinput2").checked;
     var networksearch = this.$$("#fieldnetworkinput").checked;
+    var groupOrder = parseInt(this.$$("#groupOrderInput").value);
+    var fieldOrder = parseInt(this.$$("#fieldOrderInput").value);
+
    /* var ruleextractTarget = this.$$("#fieldRuleExtractorTarget").selectedItem.value;*/
     var caseSense = this.$$("#getCaseSenstive").checked;
     xhr.open("POST", url, true);
@@ -1291,7 +1357,7 @@ poly = Polymer({
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
-            addFieldDialog.toggle();
+            this.$$("#addFieldDialog").toggle();
             this.$$("#getFields").generateRequest();
             glossariesNewField = [];
             this.$$("#fieldnameinput").value = "";
@@ -1315,6 +1381,8 @@ poly = Polymer({
             this.$$("#fieldresultinput").selected = "0";
             this.$$("#fieldsearchinput2").checked = false;
             this.$$("#fieldnetworkinput").checked = false;
+            this.$$("#groupOrderInput").value = "";
+            this.$$("#fieldOrderInput").value = "";
             /*document.getElementById("fieldRuleExtractorTarget").selected = "2";*/
 
         }
@@ -1342,7 +1410,9 @@ poly = Polymer({
             "use_in_network_search": networksearch,
             "rule_extractor_enabled": ruleExtractor,
             "predefined_extractor": predefinedExtractor,
-            "rule_extraction_target": ruleextractTarget
+            "group_order": groupOrder,
+            "field_order": fieldOrder
+            /*"rule_extraction_target": ruleextractTarget*/
         }
     });
 
@@ -1389,7 +1459,8 @@ poly = Polymer({
         }
 
         var importFileFormData = new FormData();
-        var file = $("#importProjectConfigDialog paper-input[type=file] input")[0].files[0];
+        var file = this.$$('#projectInput').inputElement.inputElement.files[0]
+       /* console.log($("#importProjectConfigDialog paper-input[type=file] input")[0].files[0]);*/
         importFileFormData.append("file_data", file);
 
         $.ajax({
@@ -1814,6 +1885,10 @@ poly = Polymer({
             }
         });
     },
+    toggleGlossary: function()
+    {
+        this.$$('#addGlossaryDialog').toggle();
+    },
     fetchCatalogError: function() {
         $.ajax({
             type: "GET",
@@ -1890,41 +1965,41 @@ poly = Polymer({
     navAction: function() {
         this.$.navTabAction.style.backgroundColor = NAV_BG_COLOR;
         this.$.navTabField.style.backgroundColor = null;
-        this.$.navTabTag.style.backgroundColor = null;
+      /*  this.$.navTabTag.style.backgroundColor = null;*/
         this.$.navTabGlossary.style.backgroundColor = null;
-        this.$.navTabTable.style.backgroundColor = null;
+      /*  this.$.navTabTable.style.backgroundColor = null;*/
 
-        this.$.tabTag.opened = false;
+      /*  this.$.tabTag.opened = false;*/
         this.$.tabAction.opened = true;
         this.$.tabGlossary.opened = false;
         this.$.tabField.opened = false;
-        this.$.tabTable.opened = false;
+       /* */
     },
     navGlossary: function () {
         this.$.navTabAction.style.backgroundColor = null;
         this.$.navTabField.style.backgroundColor = null;
-        this.$.navTabTag.style.backgroundColor = null;
+       /* this.$.navTabTag.style.backgroundColor = null;*/
         this.$.navTabGlossary.style.backgroundColor = NAV_BG_COLOR;
-        this.$.navTabTable.style.backgroundColor = null;
+      /*  this.$.navTabTable.style.backgroundColor = null;*/
 
         this.$.tabField.opened = false;
-        this.$.tabTag.opened = false;
+/*        this.$.tabTag.opened = false;*/
         this.$.tabGlossary.opened = true;
         this.$.tabAction.opened = false;
-        this.$.tabTable.opened = false;
+/*        this.$.tabTable.opened = false;*/
     },
     navField: function() {
         this.$.navTabAction.style.backgroundColor = null;
         this.$.navTabField.style.backgroundColor = NAV_BG_COLOR;
-        this.$.navTabTag.style.backgroundColor = null;
+        // this.$.navTabTag.style.backgroundColor = null;
         this.$.navTabGlossary.style.backgroundColor = null;
-        this.$.navTabTable.style.backgroundColor = null;
+    /*    this.$.navTabTable.style.backgroundColor = null;*/
 
-        this.$.tabTag.opened = false;
+   /*     this.$.tabTag.opened = false;*/
         this.$.tabGlossary.opened = false;
         this.$.tabField.opened = true;
         this.$.tabAction.opened = false;
-        this.$.tabTable.opened = false;
+       /* this.$.tabTable.opened = false;*/
     },
     navTable: function() {
         this.$.navTabAction.style.backgroundColor = null;

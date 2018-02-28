@@ -175,17 +175,14 @@
 
     <app-drawer-layout>  
         <app-drawer slot="drawer" id="options" >
-                <app-toolbar style="height: 100%">
+                <app-toolbar style="margin-top: 120px;" >
                     <div>
-                       
                       <paper-item  id="navTabAction" on-tap="navAction">Actions</paper-item>
-                      <paper-item id="navTabTable" on-tap="navTable">Tables</paper-item>
+                      <!-- <paper-item id="navTabTable" on-tap="navTable">Tables</paper-item> -->
                       <paper-item id="navTabField" on-tap="navField">Fields</paper-item>
-                      <paper-item id="navTabTag" on-tap="navTag">Tags</paper-item>
-                      <paper-item id="navTabGlossary" on-tap="navGlossary">Glossaries</paper-item>
-                
-                  </div>
-
+                      <!-- <paper-item id="navTabTag" on-tap="navTag">Tags</paper-item> -->
+                      <paper-item id="navTabGlossary" on-tap="navGlossary">Glossaries</paper-item>               
+                    </div>
                 </app-toolbar>
             </app-drawer>
 
@@ -213,8 +210,8 @@
                                  <paper-icon-button icon="more-vert"  slot="dropdown-trigger" style="width:45px;height:45px;" ></paper-icon-button>
                                   <paper-listbox slot="dropdown-content" selected="-1">
                                   <paper-item on-tap="editFilters" id="menuEditfilter"><iron-icon icon="create" style="float:left;padding-right: 5px"></iron-icon><div style="float: right;text-align: right;">Edit Filters</div></paper-item>
-                                    <paper-item on-tap="exportProject" id="menuExportProject"><iron-icon icon="file-download" style="float:left;padding-right: 5px"></iron-icon><div style="float: right;text-align: right;">Export Project</div></paper-item>
-                                    <paper-item on-tap="importProjectFunction" id="menuImportProject"><iron-icon icon="file-upload" style="float:left;padding-right: 5px"></iron-icon><div style="float: right;text-align: right;">Import Project</div></paper-item>
+                                    <paper-item on-tap="exportProject" id="menuExportProject"><iron-icon icon="file-upload" style="float:left;padding-right: 5px"></iron-icon><div style="float: right;text-align: right;">Export Project</div></paper-item>
+                                    <paper-item on-tap="importProjectFunction" id="menuImportProject"><iron-icon icon="file-download" style="float:left;padding-right: 5px"></iron-icon><div style="float: right;text-align: right;">Import Project</div></paper-item>
                                     <paper-item on-tap="getToHome"><iron-icon icon="arrow-back" style="float:left;padding-right: 5px"></iron-icon><div style="float: right;text-align: right;">All Projects</div></paper-item>
                                     <paper-item on-tap="openKibana"><img src="./static/images/kibana.png" style="float:left;padding-right: 5px;height:24px;width:24px"></img><div style="float: right;text-align: right;">Kibana</div></paper-item>
                                     </paper-listbox>
@@ -294,89 +291,15 @@
                                 <paper-icon-button icon="launch" style="color:#263238;" on-click="goToLandMark" id="website" value="{{item.tld}}"></paper-icon-button>
                             </template>
                         </vaadin-grid-column>
-<!--                         <paper-datatable-column id="tldTableTLD" header="TLD" property="tld" sortable sorted type="String" style="width:15%;" align="left">
-                        </paper-datatable-column>
-                        <paper-datatable-column header="Total" property="total_num" sortable type="Number" style="width:10%;" align="right">
-                        </paper-datatable-column>
-                        <paper-datatable-column header="KG" property="es_num" sortable type="Number" style="width:10%;" align="right">
-                        </paper-datatable-column>
-                        <paper-datatable-column header="Desired" property="desired_num" sortable
-                                                type="Number" style="width:10%;" align="right">
-                        </paper-datatable-column>
-                        <paper-datatable-column header="Landmark" property="landmark" style="width:10%;" align="center">
-                        </paper-datatable-column>
-                    </paper-datatable> -->
                     </vaadin-grid>
                 </div>
 
               
 
                 <div class="action-buttons" style="text-align: center margin:1em; width: 20% height:90%">
-
-                    <!--<paper-button style="width:100%;background-color:green"-->
-                                  <!--on-tap="switchPipeline"-->
-                                  <!--id="btnSwitchPipeline"-->
-                                  <!--raised>Turn on Pipeline-->
-                    <!--</paper-button>-->
-                   <!--  <div style="margin: 0 0.29em; width:100%;">
-                        <div style="position:relative;float:left;left:50%;">
-                        <span style="float:left; text-transform: uppercase;margin-left:-50%">Pipeline
-                            :</span>
-                        <paper-toggle-button style="float:left; margin-left:10px" on-change="switchPipeline" id="btnSwitchPipeline" ></paper-toggle-button>
-                        </div>
-                    </div> -->
-                  <!--   <br>
-                    <br>
-                    <paper-button style="width: 100%; background-color:red" on-tap="recreateMapping" id="btnRecreateMapping" raised>Recreate
-                        Knowledge Graph
-                    </paper-button>
-                    <br><br> -->
-<!-- 
-                    <paper-button style="width: 100%" on-click="callImportFileFormDialog"
-                                  raised>Import JSON Lines File</paper-button>
-                    <br> -->
                     <a><paper-button style="width: 100%; color:grey" on-tap="fetchCatalogError">Log of building catalog</paper-button></a>
                     <br><br>
-
-                  <!--   <div style="width:100%;vertical-align: middle;">
-                        <paper-input id="globalDesiredNumber" label="Desired number of docs to run per TLD"
-                                     value="10" type="number" min="0" max="999999999" maxlength="10" auto-validate pattern="[0-9]{1,11}"></paper-input>
-                        <button style="float:right" on-tap="updateDesiredNumber">Update All</button>
-                    </div> -->
-                    <!--<paper-button style="width:100%"-->
-                                  <!--on-tap="addDataToQueue"-->
-                                  <!--raised>Add data to queue-->
-                    <!--</paper-button>-->
-                    <br><br>
-
-               <!--      <paper-button style="width:100%"
-                                  on-tap="exportProject"
-                                  id="btnExportProject"
-                                  raised>Export Project
-                    </paper-button>
-                    <br><br>
-                    <paper-button style="width:100%"
-                                  onclick="importProjectConfigDialog.toggle()"
-                                  id="btnImportProject"
-                                  raised>Import Project
-                    </paper-button>
- -->
-                <!--     <br><br>
-                    <paper-button style="width:100%"
-                                  on-tap="editFilters"
-                                  id="btnEditFilters"
-                                  raised>Edit Filters
-                    </paper-button> -->
-
                 </div>
-
-
-                <!-- <div class="extract-form" style="position:fixed;bottom: 2%;width: 100%;background-color: #f9f9f9">
-                    <paper-button style="width: 200px;float:right;margin-top:10px;margin-right:10%;" onclick="" raised><strong>Extract</strong></paper-button>
-                    <paper-input class="addProjClass" label="Number of lines" id=number_of_lines style="float:right;margin-right:2%"></paper-input>
-                    <paper-button style="width: 200px;float:left;margin-top:10px;margin-left:5%;background-color: #d9534f" raised onclick="deleteCheckBoxList()"><strong>Delete</strong></paper-button>
-                </div> -->
-
 
             </iron-collapse>
 
@@ -408,111 +331,12 @@
         </template>
          </paper-card>
         
-
-                     
-            <!--     <div style="margin-bottom: 2em;">
-                <template is="dom-repeat" items="{{fields}}">
-                  <div  id = "projectSection" style="height:65px;margin-left:20px;margin-right:20px" >
-                  </div> -->
-                   <!--  <br>
-                    <paper-button on-tap="addNewFieldSetup" raised
-                                  style="float:right;text-transform:none"><strong>Add Field</strong></paper-button>
-                    <br> <br><br> -->
-                    
-                        <!-- <paper-styles class="addPaddingToSections"
-                                        style="padding-left:0.6em;width:98%;margin-left:auto;margin-right:auto">
-                            <div style="padding: 8px;">
-                                <paper-button on-tap="editFieldFunction" raised
-                                              style="float:right;text-transform:none"><strong>Edit</strong>
-                                </paper-button>
-                                <paper-button on-tap="sureToDeleteDialogFunction" raised
-                                              style="float:right;text-transform:none"><strong>Delete</strong>
-                                </paper-button>
-                                <h4><strong disabled="disabled"> {{item.0.name}}</strong></h4>
-                            </div>
-                            <div style="padding: 8px;">
-                                <span style="width: 15em;display: inline-block;"><strong
-                                        disabled="disabled">Label:</strong> {{item.0.screen_label}}</span>
-                                <span style="width: 17em;display: inline-block;"><strong disabled="disabled">Label Plural:</strong> {{item.0.screen_label_plural}}</span>
-                                <span style="width: 25em;display: inline-block;"><strong disabled="disabled">Description:</strong> {{item.0.description}}</span>
-
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <span style="width: 15em;display: inline-block;"><strong
-                                        disabled="disabled">Color:</strong> {{item.0.color}}</span>
-                                <span style="width: 17em;display: inline-block;"><strong
-                                        disabled="disabled">Icon:</strong> {{item.0.icon}}</span>
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <span style="width: 15em;display: inline-block;"><strong disabled="disabled">Number of Extraction Rules:</strong> {{item.0.number_of_rules}}</span>
-                                <span style="width: 27em;display: inline-block;"><strong disabled="disabled">Rule Extraction Target:</strong> {{item.0.rule_extraction_target}}</span>
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <span style="width: 15em;display: inline-block;"><strong
-                                        disabled="disabled">Type:</strong> {{item.0.type}}</span>
-                                <span style="width: 27em;display: inline-block;"><strong
-                                        disabled="disabled">Group Name:</strong> {{item.0.group_name}}</span>
-
-                            </div>
-                            <div style="padding: 8px;">
-                                <span style="width: 15em;display: inline-block;"><strong disabled="disabled">Search Importance:</strong> {{item.0.search_importance}}</span>
-                                <span style="width: 17em;display: inline-block;"><strong disabled="disabled">Show as Link:</strong> {{item.0.show_as_link}}</span>
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <strong disabled="disabled">Predefined Extractor:</strong>
-                                {{item.0.predefined_extractor}}
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <strong disabled="disabled">Show in Result:</strong> {{item.0.show_in_result}}
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <paper-checkbox disabled="disabled" checked="{{item.0.combine_fields}}">Combine Fields
-                                </paper-checkbox>
-                                <paper-checkbox disabled="disabled" checked="{{item.0.show_in_facets}}"
-                                                style="float:center;margin-left:53px;">Show in Facets
-                                </paper-checkbox>
-                                <paper-checkbox disabled="disabled" style="float:center;margin-left:53px;"
-                                                checked="{{item.0.rule_extractor_enabled}}"> Rule Extractor Enabled
-                                </paper-checkbox>
-
-                            </div>
-                            <div style="padding: 8px;">
-                                <paper-checkbox disabled="disabled" checked="{{item.0.show_in_search}}">Show in Search
-                                </paper-checkbox>
-                                <paper-checkbox disabled="disabled" checked="{{item.0.use_in_network_search}}"
-                                                style="float:center;margin-left:53px;">Use in Network Search
-                                </paper-checkbox>
-                            </div>
-
-                            <div style="padding: 8px;">
-                                <strong disabled="disabled">Glossaries:</strong>
-                                <template is="dom-repeat" items="{{item.0.glossaries}}"
-                                          renderedItemCount="{{renderedCount}}">
-                                    {{item}} &nbsp;
-                                </template>
-                                &nbsp;
-                                <template is="dom-if" if="{{checkLength(item)}}">
-                                    <paper-checkbox disabled="disabled" checked="{{item.0.case_sensitive}}"><span>Case Sensitive ?</span>
-                                    </paper-checkbox>
-                                </template>
-                            </div>
-                        </paper-stylesl>
-                        <br><br></template>
-                </div>
- -->
-
             </iron-collapse>
 
-             <iron-collapse id="tabTag">
+            <!--  <iron-collapse id="tabTag">
                 <div style="margin-bottom: 2em;">
                     <br>
-                    <paper-button onclick="addTagsDialog.toggle()" raised
+           s         <paper-button onclick="addTagsDialog.toggle()" raised
                                   style="float:right;text-transform:none"><strong>Add Tag</strong></paper-button>
                     <br> <br><br>
                     <template is="dom-repeat" items="{{tags}}">
@@ -556,41 +380,37 @@
                     </template>
                 </div>
             </iron-collapse>
-
+ -->
 
             <iron-collapse id="tabGlossary">
 
-                <div style="margin-bottom: 2em;">
-                    <br>
-                    <paper-button onclick="addGlossaryDialog.toggle()" raised
-                                  style="float:right;text-transform:none"><strong>Add Glossary</strong></paper-button>
-                    <br> <br>
+            <div style="width:94%;margin-left:3%;margin-right:auto;margin-top: 20px">
+              <div style="float:right;">
+              <paper-icon-button icon="add-circle" style="width: 45px;height:45px;color:#263238;" on-tap="toggleGlossary"></paper-icon-button>
+            </div>
+            </div>
+             <paper-card id="top-nav" style="width:94%;margin-left:3%;margin-right:auto; margin-top: 10px;padding: 0px;z-index:1;">
                     <template is="dom-repeat" items="{{glossaries}}">
-                        <paper-styles class="addPaddingToSections"
-                                        style="padding-left:0.6em;width:98%;margin-left:auto;margin-right:auto">
-                            <br><br>
-                            <div>
-
-                                <strong>Name:</strong> {{item.0}}
-                                <div style="float: right">
-                                    <paper-button style="text-transform:none" on-tap="editGlossaryFunction" raised>
-                                        <strong>Upload</strong></paper-button>
-                                    <paper-button style="text-transform:none" on-tap="downloadGlossaryFunction" raised>
-                                        <strong>Download</strong></paper-button>
-                                    <paper-button style="text-transform:none" on-tap="deleteGlossaryFunction" raised>
-                                        <strong>Delete</strong></paper-button>
-
-                                </div>
-
-                            </div>
-                            <br><br>
-                        </paper-styles>
+                        <div  style="height:65px;margin-left:20px;margin-right:20px" >
+              <div style="margin-top:1em;float:left;"><span><h4><b>{{item.0}}</b></h4></span></div>
+              <div style="margin-bottom:1em">
+                  <a style="color:black" href="#">
+                    <div class="border" id="inner-top-nav" style="float:right;">
+                  <paper-icon-button icon="create" on-tap="editGlossaryFunction" style="height:35px;width:35px;color:#263238;border-radius: 10px; "></paper-icon-button>
+                  <paper-icon-button icon="file-download" on-tap="downloadGlossaryFunction" style="margin-right:8px;height:35px;width:35px;color:#263238;border-radius: 10px;"></paper-icon-button>
+                  <paper-icon-button icon="delete" on-tap="deleteGlossaryFunction" style="margin-right:8px;height:35px;width:35px;color:#263238;border-radius: 10px;"></paper-icon-button>
+                  </div>
+                  </a>
+              </div>
+          </div>
+              <hr color="#DCDCDC" style="padding:0px;margin-top:0px;margin-bottom:0px">
+          
                     </template>
-                </div>
+                    </paper-card>
 
             </iron-collapse>
 
-              <iron-collapse id="tabTable">
+             <!--  <iron-collapse id="tabTable">
                 <br>
                 <paper-button
                         style="text-transform:none;float:right;;margin-right:20px;"
@@ -636,7 +456,7 @@
                     </template>
 
                 </table>
-            </iron-collapse>
+            </iron-collapse> -->
 
 
 
@@ -648,6 +468,8 @@
 
 
      <div class="content">
+
+     <!-- DIALOG FOR FIELD DELETING FIELD -->
          <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling"  id="sureToDeleteDialog" modal>
                 <p> Deleting Field : {{fieldName}}. Cannot be
@@ -657,8 +479,10 @@
                     <paper-button on-tap="deleteFieldFunction">Delete</paper-button>
                     <paper-button dialog-dismiss>Close</paper-button>
                 </div>
-            </paper-dialog>
+        </paper-dialog>
 
+
+        <!-- DIALOG FOR ACTION TLD IMPORT -->
              <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling"  id="importFileFormDialog"
                           style="width:50%;margin-left:auto;margin-right:auto" modal>
@@ -668,8 +492,6 @@
                           on-iron-form-presubmit="onPresubmit" method="POST">
                         <h4>Import File</h4>
                         <paper-input type="file" id="fileInput"></paper-input>
-                        <!--<paper-input required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255"-->
-                                     <!--class="addProjClass" label="File Name" id=file_name></paper-input> -->
                         <paper-button raised on-tap="submitImportFileForm" dialog-dismiss>Submit
                         </paper-button>
                         <paper-button raised dialog-dismiss>Close</paper-button>
@@ -677,8 +499,10 @@
                     </form>
                     </iron-form>
                 </paper-dialog-scrollable> 
-                </paper-dialog>
+            </paper-dialog>
 
+
+        <!-- DIALOG FOR ACTION DESIRED -->
                 <paper-dialog id="updateDesiredDialog" with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling"  style="width:50%;margin-left:auto;margin-right:auto"modal>
                 <p> <paper-input id="globalDesiredNumber" label="Desired number of docs to run per TLD"
@@ -690,34 +514,15 @@
                 </div>
             </paper-dialog>
 
-             <paper-dialog  id="importFileFormDialog" with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" 
-                          style="width:50%;margin-left:auto;margin-right:auto" modal>
-               <paper-dialog-scrollable>
-               <iron-form>
-                    <form content-type="multipart/form-data" id="importFileForm"
-                          on-iron-form-presubmit="onPresubmit" method="POST">
-                        <h4>Import File</h4>
-                        <paper-input type="file" id="fileInput"></paper-input>
-                        <!--<paper-input required auto-validate pattern="[A-Za-z0-9_]*" maxlength="255"-->
-                                     <!--class="addProjClass" label="File Name" id=file_name></paper-input> -->
-                        <paper-button raised on-tap="submitImportFileForm" dialog-dismiss>Submit
-                        </paper-button>
-                        <paper-button raised dialog-dismiss>Close</paper-button>
-                        <br><br>
-                    </form>
-                    </iron-form>
-                </paper-dialog-scrollable> 
-            </paper-dialog>
 
-            <paper-dialog id="importProjectConfigDialog" with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling"
+        <!-- DIALOG FOR MENU IMPORT PROJECT -->
+            <paper-dialog id="importProjectConfigDialog" with-backdrop on-iron-overlay-opened="_disableDocumentScrolling" on-iron-overlay-closed="_restoreDocumentScrolling"
                           style="width:50%;margin-left:auto;margin-right:auto" modal>
                 <paper-dialog-scrollable>
                     <form is="iron-form" content-type="multipart/form-data" id="importProjectConfigForm"
                           on-iron-form-presubmit="onPresubmit" method="POST">
                         <h4>Import Project Config File</h4>
-                        <paper-input type="file"></paper-input>
+                        <paper-input id="projectInput" type="file"></paper-input>
                         <paper-button raised on-tap="submitImportProjectConfigForm" dialog-dismiss>Submit
                         </paper-button>
                         <paper-button raised dialog-dismiss>Close</paper-button>
@@ -727,6 +532,7 @@
             </paper-dialog>
 
 
+        <!-- DIALOG FOR FIELD EDIT FIELD -->
             <paper-dialog id="editFieldsDialog" with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" style="width:50%;margin-left:auto;margin-right:auto" modal>
                 <paper-dialog-scrollable>
@@ -761,13 +567,14 @@
                     </paper-tooltip>
 
                     <div style="margin-top:0px;">
-                        <button style="float:right" onclick="setDefaultColor()">X</button>
+                        <iron-label>Icon : </iron-label><br><paper-icon-button  id="iconField" 
+                        icon="{{fieldForm.icon}}" on-click="toggleEditIcons" style$=" height:48px; width:48px; color:{{_getColorSelected(fieldForm.color)}}"></paper-icon-button>
                         <paper-swatch-picker id="colorSelect2" on-iron-select="_getEditColor" column-count=2
-                                             style="float:right" on-tap="_getEditColor"
+                                            style="padding-left: 2px" on-tap="_getEditColor"
                                              color="{{_getColorSelected(fieldForm.color)}}"
                                              color-list="[&quot;#ffb300&quot;, &quot;#1e88e5&quot;, &quot;#546e7a&quot;, &quot;#6d4c41&quot;, &quot;#00acc1&quot;, &quot;#f4511e&quot;, &quot;#5e35b1&quot;, &quot;#43a047&quot;, &quot;#1b5e20&quot;, &quot;#757575&quot;, &quot;#3949ab&quot;, &quot;#039be5&quot;, &quot;#7cb342&quot;, &quot;#c0ca33&quot;, &quot;#fb8c00&quot;, &quot;#d81b60&quot;, &quot;#8e24aa&quot;, &quot;#e53935&quot;, &quot;#b71c1c&quot;, &quot;#00897b&quot;, &quot;#fdd835&quot;]"></paper-swatch-picker>
-                        <paper-input readonly id="colorField" style="margin:0px;" class="projectInputStyle"
-                                     label="Color:" value="{{fieldForm.color}}"></paper-input>
+                       <!--  <paper-input readonly id="colorField" style="margin:0px;" class="projectInputStyle"
+                                     label="Color:" value="{{fieldForm.color}}"></paper-input> -->
                     </div>
                     <paper-tooltip fit-to-visible-bounds="true" position="left" for="colorField">The color used to
                         display the field in DIG
@@ -791,13 +598,13 @@
 
                     <paper-dropdown-menu id="searchFieldEdit" style="margin:0px;" class="projectInputStyle"
                                          label="Search Importance*:">
-                        <paper-menu id="editSearchImpValue"
+                        <paper-listbox id="editSearchImpValue"
                                     selected="{{_getSearchImportance(fieldForm.search_importance)}}"
-                                    class="dropdown-content">
+                                    slot="dropdown-content">
                             <template is="dom-repeat" items="{{searchImportance}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="searchFieldEdit">High numbers make
                         results matching in a field push documents up in the ranking
@@ -806,11 +613,11 @@
 
                     <paper-dropdown-menu id="typeFieldEdit" style="margin:0px;" class="projectInputStyle"
                                          label="Type*:">
-                        <paper-menu id="editTypeValue" selected="{{_getType(fieldForm.type)}}" class="dropdown-content">
+                        <paper-listbox id="editTypeValue" selected="{{_getType(fieldForm.type)}}" slot="dropdown-content">
                             <template is="dom-repeat" items="{{type}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="typeFieldEdit">Affects the
                         appearance as well as search behavior
@@ -819,12 +626,12 @@
 
                     <paper-dropdown-menu id="linkFieldEdit" style="margin:0px;" class="projectInputStyle"
                                          label="Show as Links*:">
-                        <paper-menu id="editlinkValue" selected={{_getLink(fieldForm.show_as_link)}}
-                                    class="dropdown-content">
+                        <paper-listbox id="editlinkValue" selected={{_getLink(fieldForm.show_as_link)}}
+                                    slot="dropdown-content">
                             <template is="dom-repeat" items="{{show_as_linkArray}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="linkFieldEdit">Specifies the
                         appearance of the field
@@ -833,12 +640,12 @@
 
                     <paper-dropdown-menu id="resultFieldEdit" style="margin:0px;" class="projectInputStyle"
                                          label="Show in Results*:">
-                        <paper-menu id="editResultValue" selected={{_getResult(fieldForm.show_in_result)}}
-                                    class="dropdown-content">
+                        <paper-listbox id="editResultValue" selected={{_getResult(fieldForm.show_in_result)}}
+                                    slot="dropdown-content">
                             <template is="dom-repeat" items="{{show_in_resultArray}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="resultFieldEdit">Location where the
                         field appears in the results page
@@ -847,13 +654,13 @@
 
                     <paper-dropdown-menu id="predefinedFieldEdit" style="margin:0px;" class="projectInputStyle"
                                          label="Predefined Extractor:">
-                        <paper-menu id="editfieldpredefinedExtractor"
+                        <paper-listbox id="editfieldpredefinedExtractor"
                                     selected={{_getPredefinedExtractor(fieldForm.predefined_extractor)}}
-                                    class="dropdown-content">
+                                    slot="dropdown-content">
                             <template is="dom-repeat" items="{{predefined_extractor_Array}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="predefinedFieldEdit">Specifies a
                         default extractor to use for a field
@@ -862,17 +669,31 @@
 
                     <paper-dropdown-menu id="ruleExtractFieldEdit" style="margin:0px;" class="projectInputStyle"
                                          label="Rule Extraction Target:">
-                        <paper-menu id="editRuleExtractionTargetValue"
+                        <paper-listbox id="editRuleExtractionTargetValue"
                                     selected={{_getExtractorTarget(fieldForm.rule_extraction_target)}}
-                                    class="dropdown-content">
+                                    slot="dropdown-content">
                             <template is="dom-repeat" items="{{extractionTargetArray}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="ruleExtractFieldEdit">When true, use
                         the custom rule extractor for this field, if one is defined
                     </paper-tooltip>
+
+                    <div>
+                        <paper-input style="margin:0; float:left; width: 191px"
+                                     class="projectInputStyle"
+                                     label="Group order" type="number" size="5"
+                                     value="{{fieldForm.group_order}}"></paper-input>
+                        <paper-input style="margin:0;float:left; width: 191px; padding-left: 8px;"
+                                     class="projectInputStyle"
+                                     label="Field order" type="number"
+                                     size="5"
+                                     value="{{fieldForm.field_order}}"></paper-input>
+                        <div style="clear:both"></div>
+                    </div>
+
 
 
                     <div>
@@ -928,6 +749,7 @@
 
 
 
+        <!-- DIALOG FOR FIELD ADD FIELD -->
             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="addFieldDialog"
                           style="width:50%;margin-left:auto;margin-right:auto">
@@ -959,50 +781,29 @@
                         display the field in DIG
                     </paper-tooltip>
 
-                    
-                </div>
-
-                    <!-- <div style="margin-top:0px;">
-                        <button style="float:right" onclick="addDefaultColor()">X</button>
-                        <paper-swatch-picker id="colorSelect" on-iron-select="_getColor" column-count=2
-                                             style="float:right" on-tap="_getColor"
-                                             color-list="[&quot;#ffb300&quot;, &quot;#1e88e5&quot;, &quot;#546e7a&quot;, &quot;#6d4c41&quot;, &quot;#00acc1&quot;, &quot;#f4511e&quot;, &quot;#5e35b1&quot;, &quot;#43a047&quot;, &quot;#1b5e20&quot;, &quot;#757575&quot;, &quot;#3949ab&quot;, &quot;#039be5&quot;, &quot;#7cb342&quot;, &quot;#c0ca33&quot;, &quot;#fb8c00&quot;, &quot;#d81b60&quot;, &quot;#8e24aa&quot;, &quot;#e53935&quot;, &quot;#b71c1c&quot;, &quot;#00897b&quot;, &quot;#fdd835&quot;]"></paper-swatch-picker>
-                        <paper-input readonly style="margin:0px;" class="projectInputStyle" label="Color:" id="fieldcolorinput"
-                                     value="{{_getColor()}}"></paper-input>
-                        <paper-tooltip fit-to-visible-bounds="true" position="left" for="fieldcolorinput">The color used to
-                        display the field in DIG
-                    </paper-tooltip>
-
-                    </div> -->
+                    </div>
                     
                     <paper-input style="margin:0px;" class="projectInputStyle" label="Group name:"
                                  id="fieldgroupnameinput"></paper-input>
                     <div style="margin-top:0px;">
                     <iron-label>Icon : </iron-label><br><paper-icon-button  id="fieldInputIcon" icon="star" on-click="toggleIcons" style$=" height:48px; width:48px; color:{{newFieldColor}}"></paper-icon-button>
-                    <!-- <paper-button style="margin-left: 20px" raised><strong>Change</strong></paper-button> -->
                     <paper-swatch-picker id="newColorSelect" on-iron-select="setNewIconColor" column-count=2
                                              style="padding-left: 2px" on-tap="setNewIconColor"
                                              color-list="[&quot;#ffb300&quot;, &quot;#1e88e5&quot;, &quot;#546e7a&quot;, &quot;#6d4c41&quot;, &quot;#00acc1&quot;, &quot;#f4511e&quot;, &quot;#5e35b1&quot;, &quot;#43a047&quot;, &quot;#1b5e20&quot;, &quot;#757575&quot;, &quot;#3949ab&quot;, &quot;#039be5&quot;, &quot;#7cb342&quot;, &quot;#c0ca33&quot;, &quot;#fb8c00&quot;, &quot;#d81b60&quot;, &quot;#8e24aa&quot;, &quot;#e53935&quot;, &quot;#b71c1c&quot;, &quot;#00897b&quot;, &quot;#fdd835&quot;]"></paper-swatch-picker>
-                      <!--   <button style="float:right" onclick="addDefaultIcon()">X</button>
-                        <paper-button style="float:right" onclick="papericonSet.toggle()" raised><strong>Get
-                            Icon</strong></paper-button>
-                        <paper-input readonly style="margin:0px;" label="Icon:" id="fieldiconinput"
-                                     value="icons:default"></paper-input> -->
                                         <paper-tooltip fit-to-visible-bounds="true" position="left" for="fieldiconinput">The icon to
                         decorate the field in DIG
                     </paper-tooltip>
-
                     </div>
          
                   
-                  <div>
+                    <div>
                     <paper-dropdown-menu id="searchDropdown" style="margin:0px;" class="projectInputStyle"
                                          label="Search Importance*:">
-                        <paper-menu id="fieldsearchinput" class="dropdown-content" selected="0">
+                         <paper-listbox slot="dropdown-content"  id="fieldsearchinput" class="dropdown-content" >
                             <template is="dom-repeat" items="{{searchImportance}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="searchDropdown">High numbers make
                         results matching in a field push documents up in the ranking
@@ -1010,11 +811,11 @@
 
 
                     <paper-dropdown-menu id="typeDropDown" style="margin:0px;" class="projectInputStyle" label="Type*:">
-                        <paper-menu id="fieldtypeinput" class="dropdown-content" selected="0">
+                        <paper-listbox id="fieldtypeinput" slot="dropdown-content">
                             <template is="dom-repeat" items="{{type}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="typeDropDown">Affects the appearance
                         as well as search behavior
@@ -1023,11 +824,11 @@
 
                     <paper-dropdown-menu id="linkDropDown" style="margin:0px;" class="projectInputStyle"
                                          label="Show as Links*:">
-                        <paper-menu id="fieldlinkinput" class="dropdown-content" selected="0">
+                        <paper-listbox id="fieldlinkinput" slot="dropdown-content" selected="0">
                             <template is="dom-repeat" items="{{show_as_linkArray}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="linkDropDown">Specifies the
                         appearance of the field
@@ -1035,12 +836,12 @@
 
 
                     <paper-dropdown-menu id="resultDropDown" style="margin:0px;" class="projectInputStyle"
-                                         label="Show in Results*:">
-                        <paper-menu id="fieldresultinput" class="dropdown-content" selected="0">
+                                         label="Show in Results*:" selected="null">
+                        <paper-listbox id="fieldresultinput" slot="dropdown-content" >
                             <template is="dom-repeat" items="{{show_in_resultArray}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="resultDropDown">Location where the
                         field appears in the results page
@@ -1048,28 +849,31 @@
 
                     <paper-dropdown-menu id="predefinedExtractorDropDown" style="margin:0px;" class="projectInputStyle"
                                          label="Predefined Extractor:">
-                        <paper-menu id="fieldpredefinedExtractor" class="dropdown-content" selected="0">
+                        <paper-listbox id="fieldpredefinedExtractor" slot="dropdown-content" selected=null>
                             <template is="dom-repeat" items="{{predefined_extractor_Array}}" as="item">
                                 <paper-item value={{item}}>{{item}}</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                     <paper-tooltip fit-to-visible-bounds="true" position="top" for="predefinedExtractorDropDown">
                         Specifies a default extractor to use for a field
                     </paper-tooltip>
                     </div>
-                    <!-- <paper-dropdown-menu id="ruleExtractorDropDown" style="margin:0px;" class="projectInputStyle"
-                                         label="Rule Extraction Target:">
-                        <paper-menu id="fieldRuleExtractorTarget" class="dropdown-content" selected="2">
-                            <template is="dom-repeat" items="{{extractionTargetArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu> -->
-                    <!-- <paper-tooltip fit-to-visible-bounds="true" position="top" for="ruleExtractorDropDown">When true,
-                        use the custom rule extractor for this field, if one is defined
-                    </paper-tooltip>
- -->
+                    <div>
+                        <paper-input style="margin:0; float:left; width: 191px"
+                                     class="projectInputStyle"
+                                     label="Group order" type="number" size="5"
+                                     value="{{fieldForm.group_order}}"
+                                     id="groupOrderInput"></paper-input>
+                        <paper-input style="margin:0;float:left; width: 191px; padding-left: 8px;"
+                                     class="projectInputStyle"
+                                     label="Field order" type="number"
+                                     size="5"
+                                     value="{{fieldForm.field_order}}"
+                                     id="fieldOrderInput"></paper-input>
+                        <div style="clear:both"></div>
+                    </div>
+
                     <div>
                         <paper-checkbox class="projectInputStyle" id="fieldcombinedfieldsinput">Combine Fields
                         </paper-checkbox>
@@ -1111,80 +915,145 @@
             </paper-dialog>
 
 
-
+        <!-- DIALOG FOR FIELD ADD FIELD - ICONSET -->
              <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="papericonSet"
                           style="width:50%;margin-left:auto;margin-right:auto" modal>
                 <paper-dialog-scrollable>
-                  
-                    <!-- <iron-meta key="iconss" value="helloo" ></iron-meta>
-                                       <div> [[iconss]]</div>
-                      <iron-meta key="iconsets" value="{{iconset}}" ></iron-meta> -->
-
-                    
-              <!--   <template is="dom-bind" id="scope"> -->
                      <template is="dom-repeat" items="{{iconsetRepeat}}" as="item">
                         <template is="dom-repeat" items="{{getIconNames(item)}}" as="iitem">
                          <span class="container">
                             <iron-icon icon="{{iitem}}" style$=" fill:{{newFieldColor}}" on-tap="setIcon"></iron-icon>
-                                <!-- <div>{{iitem}}</div> -->
-
                          </span>
                         </template> 
                     </template>
-           <!--      </template> -->
 
-                   <!--  <div> {{iconsets}}</div> -->
-
-               <!-- <template is="dom-repeat" items="{{iconsets}}" as="item">
-
-                        <h4>{{item.name}}</h4>
-                        <br>
-                        <div class="set">
-                            <template is="dom-repeat" items="{{getIconNames(item)}}" as="item">
-                  <span class="container">
-                                <iron-icon icon="{{item}}" on-tap="setIcon"></iron-icon>
-                  </span> 
-                            </template>
-                        </div>
-                        <br>
-                    </template>   -->
+               <!-- <h4>{{item.name}}</h4>  -->
                 </paper-dialog-scrollable>
-             <!--    <paper-swatch-picker id="newColorSelect"  color-changed="setNewIConColor" column-count=2
-                                             style="padding-left: 2px"                                              color-list="[&quot;#ffb300&quot;, &quot;#1e88e5&quot;, &quot;#546e7a&quot;, &quot;#6d4c41&quot;, &quot;#00acc1&quot;, &quot;#f4511e&quot;, &quot;#5e35b1&quot;, &quot;#43a047&quot;, &quot;#1b5e20&quot;, &quot;#757575&quot;, &quot;#3949ab&quot;, &quot;#039be5&quot;, &quot;#7cb342&quot;, &quot;#c0ca33&quot;, &quot;#fb8c00&quot;, &quot;#d81b60&quot;, &quot;#8e24aa&quot;, &quot;#e53935&quot;, &quot;#b71c1c&quot;, &quot;#00897b&quot;, &quot;#fdd835&quot;]"></paper-swatch-picker> -->
-
                 <paper-button style="float:right" dialog-dismiss>Close</paper-button>
             </paper-dialog>
+
+
+        <!-- DIALOG FOR FIELD EDIT FIELD - ICONSET -->
+            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                          on-iron-overlay-closed="_restoreDocumentScrolling" id="papericonEditSet"
+                          style="width:50%;margin-left:auto;margin-right:auto" modal>
+                <paper-dialog-scrollable>
+
+                   <template is="dom-repeat" items="{{iconsetRepeat}}" as="item">
+                        <template is="dom-repeat" items="{{getIconNames(item)}}" as="iitem">
+                         <span class="container">
+                            <iron-icon icon="{{iitem}}" style$=" fill:{{editFieldColor}}" on-tap="setEditIcon"></iron-icon>
+                         </span>
+                        </template> 
+                    </template>
+                </paper-dialog-scrollable>
+                <paper-button style="float:right" dialog-dismiss>Close</paper-button>
+            </paper-dialog>
+
+        <!-- DIALOG FOR FIELD EDIT FIELD - GLOSSARY -->
+             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                          on-iron-overlay-closed="_restoreDocumentScrolling" id="EditFieldGlossaries"
+                          style="width:50%;margin-left:auto;margin-right:auto">
+
+                <paper-button style="float:right;"
+                              dialog-dismiss raised on-tap="saveTempGlossaries"><strong>X</strong></paper-button>
+                <br><br><br>
+                <paper-dialog-scrollable>
+                    <paper-checkbox id="getCaseSenstive" checked="{{fieldForm.case_sensitive}}">
+                        <span>Case Sensitive ?</span></paper-checkbox>
+                    <br><br>
+                    <template is="dom-repeat" items="{{glossaries}}">
+                        <paper-styles class="addPaddingToSections"
+                                        style="padding-left:0.6em;width:98%;margin-left:auto;margin-right:auto">
+                            <div style="padding-bottom:0.5em">
+                                <span><strong style="float:left">Name:</strong> {{item.0}}</span>
+                                <paper-checkbox style="float:right;" id="{{item.0}}" raised value="">
+                                    <strong>Use</strong></paper-checkbox>
+                            </div>
+                        </paper-styles>
+                    </template>
+                </paper-dialog-scrollable>
+            </paper-dialog>
+
+
+        <!-- DIALOG FOR GLOSSARY ADD GLOSSARY -->
+             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                          on-iron-overlay-closed="_restoreDocumentScrolling" id="addGlossaryDialog"
+                          style="width:50%;margin-left:auto;margin-right:auto" modal>
+                <paper-dialog-scrollable>
+
+                    <paper-input auto-validate pattern="[A-Za-z0-9_]*" maxlength="255" style="margin:0px;"
+                                 id="glossary_nameInput" class="projectInputStyle"
+                                 label="Glossary Name:*"></paper-input>
+                    <paper-input type="file" id="glossary_fileInput"></paper-input>
+                    <paper-button raised on-click="submitGlossaryFormData">Submit</paper-button>
+                    <paper-button raised dialog-dismiss>Close</paper-button>
+                    <br><br>
+                </paper-dialog-scrollable>
+
+            </paper-dialog>
+
+        <!-- DIALOG FOR GLOSSARY EDIT GLOSSARY -->
+            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                          on-iron-overlay-closed="_restoreDocumentScrolling" id="editGlossariesDialog"
+                          style="width:50%;margin-left:auto;margin-right:auto">
+                <paper-dialog-scrollable>
+
+                    <form is="iron-form" content-type="multipart/form-data" id="formD"
+                          on-iron-form-presubmit="onPresubmit" method="POST">
+                        <h4>Glossary : {{glossaryForm}}</h4>
+                        <paper-input type="hidden" style="display:none" id="glossary_name"
+                                     value="{{glossaryForm}}"></paper-input>
+
+                        <paper-input type="file" id="glossary_file" onchange='openFile(event)'></paper-input>
+                        <paper-button raised on-click="updateGlossaryFormData">Submit</paper-button>
+                        <paper-button raised dialog-dismiss>Close</paper-button>
+                        <br><br>
+                    </form>
+                </paper-dialog-scrollable>
+
+            </paper-dialog>
+
+            <!-- DIALOG FOR ACTIONS EDIT FILTERS -->
+            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                          on-iron-overlay-closed="_restoreDocumentScrolling" id="editFiltersDialog"
+                          style="width:50%;margin-left:auto;margin-right:auto">
+                <h4>Edit Filters</h4>
+                <paper-dialog-scrollable>
+
+                        <div>
+                            <textarea id="editFiltersTextArea"
+                                      style="margin: 0px;width:100%;height: 34em;resize:none">{}</textarea>
+                        </div>
+                </paper-dialog-scrollable>
+
+                <div style="float:right">
+                    <paper-button
+                            style="float:right;margin-top:20px;margin-right:20px;"
+                            on-tap="updateFilters" raised><strong>Save</strong></paper-button>
+                    <paper-button style="float:right;margin-top:20px"
+                                  dialog-dismiss raised><strong>Cancel</strong></paper-button>
+                </div>
+            </paper-dialog>
+
+
+        <!-- DIALOG FOR ACTIONS LOG DIALOG -->
+          <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+                      on-iron-overlay-closed="_restoreDocumentScrolling" id="logDialog"
+                      style="width:50%;margin-left:auto;margin-right:auto">
+                <h4>Log of building catalog</h4>
+                <paper-dialog-scrollable >
+                <div id="logDialogContent"></div>
+                </paper-dialog-scrollable>
+            </paper-dialog>
+
           </div> 
 
-      
-
-      <!--   <app-toolbar>
-            <img src="./static/images/dig-logo-original.png" alt="">
-           <h4 style="padding-left:15em;text-align:center" id="projectNameHeader"></h4>
-            <paper-button on-tap="openKibana" raised style="float:right;margin-left:auto;background-color:white;text-transform:none">Kibana
-            </paper-button>
-            <paper-button on-tap="getToHome" raised style="float:right;margin-left:2em;background-color:white;text-transform:none">All Projects
-            </paper-button>
-        </app-toolbar> -->
-
-        <!--<paper-header-panel>-->
-            <!--<section class="adjustProjectSection">-->
-                <!--<div class="search-results-header">-->
-                    <!--<div class="paper-font-title flex">DIG Projects</div>-->
-                <!--</div>-->
-                <!--<div class="h-divider"></div>-->
-            <!--</section>-->
-        <!--</paper-header-panel>-->
-       
-      
-          
-
-           
 
 
 
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+<!--        <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="addTagsDialog"
                           style="width:50%;margin-left:auto;margin-right:auto">
                 <paper-dialog-scrollable>
@@ -1204,9 +1073,9 @@
                         onclick="addNewTag()" raised><strong>Save</strong></paper-button>
                 <paper-button style="float:right;margin-top:20px"
                               dialog-dismiss raised><strong>Cancel</strong></paper-button>
-            </paper-dialog>
+            </paper-dialog> -->
 
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
+<!--        <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="editTagsDialog"
                           style="width:50%;margin-left:auto;margin-right:auto">
                 <paper-dialog-scrollable>
@@ -1230,202 +1099,10 @@
                         on-tap="updateTag" raised><strong>Save</strong></paper-button>
                 <paper-button style="float:right;margin-top:20px"
                               dialog-dismiss raised><strong>Cancel</strong></paper-button>
-            </paper-dialog>
-
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="addFieldDialog"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <paper-dialog-scrollable>
-
-                    <span style="float:right;"> <strong>Rules can be added after creating this Field</strong></span>
-
-                    <paper-input auto-validate pattern="[A-Za-z0-9_]*" maxlength="255" style="margin:0px;" required
-                                 class="" label="Name:*" id="fieldnameinput"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="fieldnameinput">The name of a
-                        field, cannot be changed
-                    </paper-tooltip>
-
-                    <paper-input style="margin:0px;" class="projectInputStyle" label="Description:"
-                                 id="fielddescriptioninput"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="fielddescriptioninput">A
-                        description of the field
-                    </paper-tooltip>
-
-                    <div style="margin:0px;">
-                    <paper-input style="margin:0px;float:right;width:50%" required class="projectInputStyle" label="Screen Label Plural:"
-                                 id="fieldscreenlabelPluralinput"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="fieldscreenlabelPluralinput">Label
-                        when a field contains multiple values
-                    </paper-tooltip>
-                    <paper-input style="margin:0px;width:50%" class="projectInputStyle" label="Screen Label:"
-                                 id="fieldscreenlabelinput"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="fieldscreenlabelinput">The text to
-                        display the field in DIG
-                    </paper-tooltip>
-
-                    
-                </div>
-
-                    <div style="margin-top:0px;">
-                        <button style="float:right" onclick="addDefaultColor()">X</button>
-                        <paper-swatch-picker id="colorSelect" on-iron-select="_getColor" column-count=2
-                                             style="float:right" on-tap="_getColor"
-                                             color-list="[&quot;#ffb300&quot;, &quot;#1e88e5&quot;, &quot;#546e7a&quot;, &quot;#6d4c41&quot;, &quot;#00acc1&quot;, &quot;#f4511e&quot;, &quot;#5e35b1&quot;, &quot;#43a047&quot;, &quot;#1b5e20&quot;, &quot;#757575&quot;, &quot;#3949ab&quot;, &quot;#039be5&quot;, &quot;#7cb342&quot;, &quot;#c0ca33&quot;, &quot;#fb8c00&quot;, &quot;#d81b60&quot;, &quot;#8e24aa&quot;, &quot;#e53935&quot;, &quot;#b71c1c&quot;, &quot;#00897b&quot;, &quot;#fdd835&quot;]"></paper-swatch-picker>
-                        <paper-input readonly style="margin:0px;" class="projectInputStyle" label="Color:" id="fieldcolorinput"
-                                     value="{{_getColor()}}"></paper-input>
-                        <paper-tooltip fit-to-visible-bounds="true" position="left" for="fieldcolorinput">The color used to
-                        display the field in DIG
-                    </paper-tooltip>
-
-                    </div>
-                    
-                    <paper-input style="margin:0px;" class="projectInputStyle" label="Group name:"
-                                 id="fieldgroupnameinput"></paper-input>
-                    <div style="margin-top:0px;">
-                        <button style="float:right" onclick="addDefaultIcon()">X</button>
-                        <paper-button style="float:right" onclick="papericonSet.toggle()" raised><strong>Get
-                            Icon</strong></paper-button>
-                        <paper-input readonly style="margin:0px;" label="Icon:" id="fieldiconinput"
-                                     value="icons:default"></paper-input>
-
-                    </div>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="fieldiconinput">The icon to
-                        decorate the field in DIG
-                    </paper-tooltip>
-
-                    <paper-dropdown-menu id="searchDropdown" style="margin:0px;" class="projectInputStyle"
-                                         label="Search Importance*:">
-                        <paper-menu id="fieldsearchinput" class="dropdown-content" selected="0">
-                            <template is="dom-repeat" items="{{searchImportance}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="searchDropdown">High numbers make
-                        results matching in a field push documents up in the ranking
-                    </paper-tooltip>
+            </paper-dialog> -->
 
 
-                    <paper-dropdown-menu id="typeDropDown" style="margin:0px;" class="projectInputStyle" label="Type*:">
-                        <paper-menu id="fieldtypeinput" class="dropdown-content" selected="0">
-                            <template is="dom-repeat" items="{{type}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="typeDropDown">Affects the appearance
-                        as well as search behavior
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="linkDropDown" style="margin:0px;" class="projectInputStyle"
-                                         label="Show as Links*:">
-                        <paper-menu id="fieldlinkinput" class="dropdown-content" selected="0">
-                            <template is="dom-repeat" items="{{show_as_linkArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="linkDropDown">Specifies the
-                        appearance of the field
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="resultDropDown" style="margin:0px;" class="projectInputStyle"
-                                         label="Show in Results*:">
-                        <paper-menu id="fieldresultinput" class="dropdown-content" selected="0">
-                            <template is="dom-repeat" items="{{show_in_resultArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="resultDropDown">Location where the
-                        field appears in the results page
-                    </paper-tooltip>
-
-                    <paper-dropdown-menu id="predefinedExtractorDropDown" style="margin:0px;" class="projectInputStyle"
-                                         label="Predefined Extractor:">
-                        <paper-menu id="fieldpredefinedExtractor" class="dropdown-content" selected="0">
-                            <template is="dom-repeat" items="{{predefined_extractor_Array}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="predefinedExtractorDropDown">
-                        Specifies a default extractor to use for a field
-                    </paper-tooltip>
-
-                    <!-- <paper-dropdown-menu id="ruleExtractorDropDown" style="margin:0px;" class="projectInputStyle"
-                                         label="Rule Extraction Target:">
-                        <paper-menu id="fieldRuleExtractorTarget" class="dropdown-content" selected="2">
-                            <template is="dom-repeat" items="{{extractionTargetArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu> -->
-              <!--       <paper-tooltip fit-to-visible-bounds="true" position="top" for="ruleExtractorDropDown">When true,
-                        use the custom rule extractor for this field, if one is defined
-                    </paper-tooltip> -->
-
-                    <div>
-                        <paper-checkbox class="projectInputStyle" id="fieldcombinedfieldsinput">Combine Fields
-                        </paper-checkbox>
-
-                        <paper-checkbox class="projectInputStyle" id="fieldfacetinput">Show in Facets</paper-checkbox>
-                        <paper-tooltip for="fieldfacetinput">When true, the field appears in the facets section
-                        </paper-tooltip>
-
-                        <paper-checkbox class="projectInputStyle" id="fieldnetworkinput">Show in Network Search
-                        </paper-checkbox>
-                        <paper-tooltip for="fieldnetworkinput">Support network creation using the values from a field
-                        </paper-tooltip>
-
-
-                        <paper-checkbox class="projectInputStyle" id="fieldsearchinput2">Show in Search</paper-checkbox>
-                        <paper-tooltip for="fieldsearchinput2">When true, the field appears in the query form
-                        </paper-tooltip>
-
-
-                        <paper-checkbox class="projectInputStyle" id="fieldRuleExtractor">Rule Extractor Enabled
-                        </paper-checkbox>
-                        <paper-tooltip for="fieldRuleExtractor">When true, use the custom rule extractor for this field,
-                            if one is defined
-                        </paper-tooltip>
-
-                    </div>
-                </paper-dialog-scrollable>
-
-                <br>
-                <paper-button style="float:right;margin-top:20px;margin-right:20px"
-                              on-tap="getFieldGlossariesForAdd" raised><strong>Glossaries</strong></paper-button>
-
-                <paper-button
-                        style="float:right;margin-top:20px;"
-                        onclick="addNewField()" raised><strong>Save</strong></paper-button>
-                <paper-button style="float:right;margin-top:20px"
-                              dialog-dismiss raised><strong>Cancel</strong></paper-button>
-
-            </paper-dialog>
-
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="editGlossariesDialog"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <paper-dialog-scrollable>
-
-                    <form is="iron-form" content-type="multipart/form-data" id="formD"
-                          on-iron-form-presubmit="onPresubmit" method="POST">
-                        <h4>Glossary : {{glossaryForm}}</h4>
-                        <paper-input type="hidden" style="display:none" id="glossary_name"
-                                     value="{{glossaryForm}}"></paper-input>
-
-                        <paper-input type="file" id="glossary_file" id="input" onchange='openFile(event)'></paper-input>
-                        <paper-button raised onclick="updateFormData()">Submit</paper-button>
-                        <paper-button raised dialog-dismiss>Close</paper-button>
-                        <br><br>
-                    </form>
-                </paper-dialog-scrollable>
-
-            </paper-dialog>
+            
 
             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="uploadZipFileDialog"
@@ -1443,30 +1120,7 @@
 
             </paper-dialog>
 
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="EditFieldGlossaries"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-
-                <paper-button style="float:right;"
-                              dialog-dismiss raised on-tap="saveTempGlossaries"><strong>X</strong></paper-button>
-                <br><br><br>
-                <paper-dialog-scrollable>
-                    <paper-checkbox id="getCaseSenstive" checked="{{fieldForm.case_sensitive}}">
-                        <span>Case Sensitive ?</span></paper-checkbox>
-                    <br><br>
-                    <template is="dom-repeat" items="{{glossaries}}">
-                        <paper-styles class="addPaddingToSections"
-                                        style="padding-left:0.6em;width:98%;margin-left:auto;margin-right:auto">
-                            <div style="padding-bottom:0.5em">
-                                <span><strong style="float:left">Name:</strong> {{item.0}}</span>
-                                <paper-checkbox style="float:right;" id="{{item.0}}" raised value="">
-                                    <strong>Use</strong></paper-checkbox>
-                            </div>
-                        </paper-styles>
-                    </template>
-                </paper-dialog-scrollable>
-
-            </paper-dialog>
+           
 
             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="spacyRulesDialog"
@@ -1561,218 +1215,7 @@
 
             </paper-dialog>
 
-            <!-- <paper-dialog id="editFieldsDialog"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <paper-dialog-scrollable>
-
-                    <div>
-                        <paper-button style="float:right;"
-                                      on-tap="editRules" raised><strong>Upload Rules</strong></paper-button>
-                        <paper-button style="float:right;"
-                                      on-tap="editRulesNextDialog" raised><strong>Edit Rules</strong></paper-button>
-
-                        <h4>Field : {{fieldForm.name}}</h4>
-
-                    </div>
-                    <paper-input id="descriptionField" style="margin:0px;" class="projectInputStyle"
-                                 label="Description:" value="{{fieldForm.description}}"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="descriptionField">A description of
-                        the field
-                    </paper-tooltip>
-
-
-                    <paper-input id="screenLabelField" style="margin:0px;" class="projectInputStyle"
-                                 label="Screen Label:" value="{{fieldForm.screen_label}}"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="screenLabelField">The text to
-                        display the field in DIG
-                    </paper-tooltip>
-
-                    <paper-input id="screenLabelPluralField" style="margin:0px;" required class=""
-                                 label="Screen Label Plural:" value="{{fieldForm.screen_label_plural}}"></paper-input>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="screenLabelPluralField">Label when
-                        a field contains multiple values
-                    </paper-tooltip>
-
-                    <div style="margin-top:0px;">
-                        <button style="float:right" onclick="setDefaultColor()">X</button>
-                        <paper-swatch-picker id="colorSelect2" on-iron-select="_getEditColor" column-count=2
-                                             style="float:right" on-tap="_getEditColor"
-                                             color="{{_getColorSelected(fieldForm.color)}}"
-                                             color-list="[&quot;#ffb300&quot;, &quot;#1e88e5&quot;, &quot;#546e7a&quot;, &quot;#6d4c41&quot;, &quot;#00acc1&quot;, &quot;#f4511e&quot;, &quot;#5e35b1&quot;, &quot;#43a047&quot;, &quot;#1b5e20&quot;, &quot;#757575&quot;, &quot;#3949ab&quot;, &quot;#039be5&quot;, &quot;#7cb342&quot;, &quot;#c0ca33&quot;, &quot;#fb8c00&quot;, &quot;#d81b60&quot;, &quot;#8e24aa&quot;, &quot;#e53935&quot;, &quot;#b71c1c&quot;, &quot;#00897b&quot;, &quot;#fdd835&quot;]"></paper-swatch-picker>
-                        <paper-input readonly id="colorField" style="margin:0px;" class="projectInputStyle"
-                                     label="Color:" value="{{fieldForm.color}}"></paper-input>
-                    </div>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="colorField">The color used to
-                        display the field in DIG
-                    </paper-tooltip>
-
-
-                    <paper-input style="margin:0px;" class="projectInputStyle" label="Group name:"
-                                 value="{{fieldForm.group_name}}"></paper-input>
-                    <div style="margin-top:0px;">
-                        <button style="float:right" onclick="setDefaultIcon()">X</button>
-                        <paper-button style="float:right" onclick="papericonEditSet.toggle()" raised><strong>Get
-                            Icon</strong></paper-button>
-                        <paper-input readonly id="iconField" style="margin:0px;" label="Icon:"
-                                     value="{{fieldForm.icon}}"></paper-input>
-                    </div>
-                    <paper-tooltip fit-to-visible-bounds="true" position="left" for="iconField">The icon to decorate the
-                        field in DIG
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="searchFieldEdit" style="margin:0px;" class="projectInputStyle"
-                                         label="Search Importance*:">
-                        <paper-menu id="editSearchImpValue"
-                                    selected="{{_getSearchImportance(fieldForm.search_importance)}}"
-                                    class="dropdown-content">
-                            <template is="dom-repeat" items="{{searchImportance}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="searchFieldEdit">High numbers make
-                        results matching in a field push documents up in the ranking
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="typeFieldEdit" style="margin:0px;" class="projectInputStyle"
-                                         label="Type*:">
-                        <paper-menu id="editTypeValue" selected="{{_getType(fieldForm.type)}}" class="dropdown-content">
-                            <template is="dom-repeat" items="{{type}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="typeFieldEdit">Affects the
-                        appearance as well as search behavior
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="linkFieldEdit" style="margin:0px;" class="projectInputStyle"
-                                         label="Show as Links*:">
-                        <paper-menu id="editlinkValue" selected={{_getLink(fieldForm.show_as_link)}}
-                                    class="dropdown-content">
-                            <template is="dom-repeat" items="{{show_as_linkArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="linkFieldEdit">Specifies the
-                        appearance of the field
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="resultFieldEdit" style="margin:0px;" class="projectInputStyle"
-                                         label="Show in Results*:">
-                        <paper-menu id="editResultValue" selected={{_getResult(fieldForm.show_in_result)}}
-                                    class="dropdown-content">
-                            <template is="dom-repeat" items="{{show_in_resultArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="resultFieldEdit">Location where the
-                        field appears in the results page
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="predefinedFieldEdit" style="margin:0px;" class="projectInputStyle"
-                                         label="Predefined Extractor:">
-                        <paper-menu id="editfieldpredefinedExtractor"
-                                    selected={{_getPredefinedExtractor(fieldForm.predefined_extractor)}}
-                                    class="dropdown-content">
-                            <template is="dom-repeat" items="{{predefined_extractor_Array}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="predefinedFieldEdit">Specifies a
-                        default extractor to use for a field
-                    </paper-tooltip>
-
-
-                    <paper-dropdown-menu id="ruleExtractFieldEdit" style="margin:0px;" class="projectInputStyle"
-                                         label="Rule Extraction Target:">
-                        <paper-menu id="editRuleExtractionTargetValue"
-                                    selected={{_getExtractorTarget(fieldForm.rule_extraction_target)}}
-                                    class="dropdown-content">
-                            <template is="dom-repeat" items="{{extractionTargetArray}}" as="item">
-                                <paper-item value={{item}}>{{item}}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-tooltip fit-to-visible-bounds="true" position="top" for="ruleExtractFieldEdit">When true, use
-                        the custom rule extractor for this field, if one is defined
-                    </paper-tooltip>
-
-
-                    <div>
-
-
-                        <paper-checkbox id="combineEditField" class="projectInputStyle"
-                                        checked="{{fieldForm.combine_fields}}">Combine Fields
-                        </paper-checkbox>
-
-
-                        <paper-checkbox id="facetFieldEdit" class="projectInputStyle"
-                                        checked="{{fieldForm.show_in_facets}}">Show in Facets
-                        </paper-checkbox>
-                        <paper-tooltip fit-to-visible-bounds="true" position="top" for="facetFieldEdit">When true, the
-                            field appears in the facets section
-                        </paper-tooltip>
-
-                        <paper-checkbox id="networkFieldEdit" class="projectInputStyle"
-                                        checked="{{fieldForm.use_in_network_search}}">Show in Network Search
-                        </paper-checkbox>
-                        <paper-tooltip fit-to-visible-bounds="true" position="top" for="networkFieldEdit">Support
-                            network creation using the values from a field
-                        </paper-tooltip>
-
-                        <paper-checkbox id="searcheditField2" class="projectInputStyle"
-                                        checked="{{fieldForm.show_in_search}}">Show in Search
-                        </paper-checkbox>
-                        <paper-tooltip fit-to-visible-bounds="true" position="top" for="searcheditField2">When true, the
-                            field appears in the query form
-                        </paper-tooltip>
-
-                        <paper-checkbox id="ruleExtractorEditField" class="projectInputStyle"
-                                        checked="{{fieldForm.rule_extractor_enabled}}">Rule Extractor Enabled
-                        </paper-checkbox>
-                        <paper-tooltip fit-to-visible-bounds="true" position="top" for="ruleExtractorEditField">When
-                            true, use the custom rule extractor for this field, if one is defined
-                        </paper-tooltip>
-
-                    </div>
-                </paper-dialog-scrollable>
-
-                <br>
-                <paper-button style="float:right;margin-top:20px;margin-right:20px"
-                              on-tap="getFieldGlossary" raised><strong>Glossaries</strong></paper-button>
-
-                <paper-button
-                        style="float:right;margin-top:20px;"
-                        on-tap="updateField" raised><strong>Save</strong></paper-button>
-                <paper-button style="float:right;margin-top:20px"
-                              dialog-dismiss raised><strong>Cancel</strong></paper-button>
-
-            </paper-dialog> -->
-
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="addGlossaryDialog"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <paper-dialog-scrollable>
-
-                    <paper-input auto-validate pattern="[A-Za-z0-9_]*" maxlength="255" style="margin:0px;"
-                                 id="glossary_nameInput" class="projectInputStyle"
-                                 label="Glossary Name:*"></paper-input>
-                    <paper-input type="file" id="glossary_fileInput"></paper-input>
-                    <paper-button raised onclick="submitFormData()">Submit</paper-button>
-                    <paper-button raised dialog-dismiss>Close</paper-button>
-                    <br><br>
-                </paper-dialog-scrollable>
-
-            </paper-dialog>
+           
 
             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="modalDialog" modal>
@@ -1814,31 +1257,6 @@
                 </div>
             </paper-dialog>
 
-            
-
-          <!--   <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="papericonEditSet"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <paper-dialog-scrollable>
-
-                    <iron-meta type="iconset" list="{{iconsets}}"></iron-meta>
-
-                    <template is="dom-repeat" items="{{iconsets}}">
-                        <h4>{{item.name}}</h4>
-                        <br>
-                        <div class="set">
-                            <template is="dom-repeat" items="{{getIconNames(item)}}">
-				  <span class="container">
-					<iron-icon icon="{{item}}" on-tap="setEditIcon"></iron-icon>
-				  </span>
-                            </template>
-                        </div>
-                        <br>
-                    </template>
-                </paper-dialog-scrollable>
-                <paper-button style="float:right" dialog-dismiss>Close</paper-button>
-            </paper-dialog> -->
-
             <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
                           on-iron-overlay-closed="_restoreDocumentScrolling" id="papercolorSet">
 
@@ -1879,26 +1297,7 @@
                               dialog-dismiss raised><strong>Cancel</strong></paper-button>
             </paper-dialog>
 
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                          on-iron-overlay-closed="_restoreDocumentScrolling" id="editFiltersDialog"
-                          style="width:50%;margin-left:auto;margin-right:auto">
-                <h4>Edit Filters</h4>
-                <paper-dialog-scrollable>
 
-                        <div>
-                            <textarea id="editFiltersTextArea"
-                                      style="margin: 0px;width:100%;height: 34em;resize:none">{}</textarea>
-                        </div>
-                </paper-dialog-scrollable>
-
-                <div style="float:right">
-                    <paper-button
-                            style="float:right;margin-top:20px;margin-right:20px;"
-                            on-tap="updateFilters" raised><strong>Save</strong></paper-button>
-                    <paper-button style="float:right;margin-top:20px"
-                                  dialog-dismiss raised><strong>Cancel</strong></paper-button>
-                </div>
-            </paper-dialog>
 
             <paper-dialog alwaysOnTop with-backdrop modal id="progressDialog" sizingTarget="p"
                           style="margin-left:auto;margin-right:auto;padding:1em;">
@@ -1908,14 +1307,7 @@
                 <p>After this step, data will be processed on the backend, you can click "Log of building catalog" to fetch the status.</p>
             </paper-dialog>
 
-            <paper-dialog with-backdrop on-iron-overlay-opened="_disableDocumentScrolling"
-                      on-iron-overlay-closed="_restoreDocumentScrolling" id="logDialog"
-                      style="width:50%;margin-left:auto;margin-right:auto">
-                <h4>Log of building catalog</h4>
-                <paper-dialog-scrollable >
-                <div id="logDialogContent"></div>
-                </paper-dialog-scrollable>
-            </paper-dialog>
+            
 
 
         </paper-styles>
